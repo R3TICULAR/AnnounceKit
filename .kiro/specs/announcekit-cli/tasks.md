@@ -70,28 +70,28 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
 - [x] 4. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 5. Implement HTML parsing layer
-  - [ ] 5.1 Create HTML parser using jsdom
+- [x] 5. Implement HTML parsing layer
+  - [x] 5.1 Create HTML parser using jsdom
     - Initialize jsdom with lenient parsing mode
     - Implement parseHTML() function accepting string input
     - Configure error recovery for malformed HTML
     - Return DOM document object
     - _Requirements: 1.1, 1.3_
 
-  - [ ]* 5.2 Write property test for parser robustness
+  - [x]* 5.2 Write property test for parser robustness
     - **Property 1: Parser Robustness**
     - **Validates: Requirements 1.1, 1.3**
     - Generate random HTML strings (valid and malformed)
     - Test parser never crashes or hangs
     - Verify parser returns DOM or clear error message
 
-  - [ ] 5.3 Implement error handling for parsing failures
+  - [x] 5.3 Implement error handling for parsing failures
     - Catch jsdom parsing errors
     - Emit warnings for malformed HTML with line numbers
     - Continue processing with recovered DOM
     - _Requirements: 1.3, 9.2, 9.4_
 
-  - [ ]* 5.4 Write unit tests for HTML parsing
+  - [x]* 5.4 Write unit tests for HTML parsing
     - Test valid HTML parsing
     - Test malformed HTML with unclosed tags
     - Test invalid nesting recovery
