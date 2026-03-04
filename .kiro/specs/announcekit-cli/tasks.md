@@ -18,56 +18,56 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
   - Set up basic package.json scripts (build, test, dev)
   - _Requirements: 12.1, 12.2_
 
-- [ ] 2. Implement core data model interfaces
-  - [ ] 2.1 Create TypeScript interfaces for Canonical Announcement Model
+- [x] 2. Implement core data model interfaces
+  - [x] 2.1 Create TypeScript interfaces for Canonical Announcement Model
     - Define ModelVersion, AccessibleRole, AccessibleState, AccessibleValue, FocusInfo interfaces
     - Define AccessibleNode and AnnouncementModel interfaces
     - Add JSDoc comments documenting each interface and field
     - Export all interfaces from core module
     - _Requirements: 3.1, 3.2_
 
-  - [ ]* 2.2 Write property test for model serialization round-trip
+  - [x]* 2.2 Write property test for model serialization round-trip
     - **Property 5: Model Serialization Round Trip**
     - **Validates: Requirements 3.2, 11.1, 11.4**
     - Create arbitrary generators for all model types
     - Test that serialize → deserialize produces equivalent model
     - Verify all fields preserved with correct types
 
-  - [ ] 2.3 Implement model validation functions
+  - [x] 2.3 Implement model validation functions
     - Create validation function for AccessibleRole enum values
     - Create validation function for AccessibleState constraints
     - Create validation function for tree structure integrity (no cycles)
     - Add error messages for validation failures
     - _Requirements: 3.1, 11.3_
 
-  - [ ]* 2.4 Write unit tests for model validation
+  - [x]* 2.4 Write unit tests for model validation
     - Test valid models pass validation
     - Test invalid roles are rejected
     - Test invalid state values are rejected
     - Test circular references are detected
 
-- [ ] 3. Implement JSON serialization layer
-  - [ ] 3.1 Create JSON serialization functions
+- [x] 3. Implement JSON serialization layer
+  - [x] 3.1 Create JSON serialization functions
     - Implement serializeModel() with deterministic property ordering
     - Implement deserializeModel() with validation
     - Add version field to serialized output
     - Add metadata (extractedAt timestamp, optional sourceHash)
     - _Requirements: 3.2, 3.5_
 
-  - [ ]* 3.2 Write property test for deterministic output
+  - [x]* 3.2 Write property test for deterministic output
     - **Property 6: Deterministic Output**
     - **Validates: Requirements 3.3, 3.5**
     - Test that same model serializes to identical JSON multiple times
     - Verify property ordering is consistent
     - Verify no randomness in output
 
-  - [ ]* 3.3 Write unit tests for serialization edge cases
+  - [x]* 3.3 Write unit tests for serialization edge cases
     - Test empty model serialization
     - Test deeply nested node serialization
     - Test optional fields (description, value) handling
     - Test deserialization error handling for invalid JSON
 
-- [ ] 4. Checkpoint - Ensure all tests pass
+- [x] 4. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 5. Implement HTML parsing layer
