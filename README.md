@@ -1,2 +1,31 @@
 # AnnounceKit
-AnnounceKit analyzes HTML/JSX to produce a normalized accessibility announcement model and approximate screen-reader output across platforms, helping teams catch a11y issues earlier and reduce cross-OS triage friction.
+
+CLI tool for analyzing HTML accessibility announcements.
+
+## Installation
+
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+## Testing
+
+```bash
+npm test
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Usage
+
+Documentation coming soon.
