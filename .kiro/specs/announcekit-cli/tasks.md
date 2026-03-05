@@ -98,8 +98,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test empty input handling
     - Test large document handling
 
-- [ ] 6. Implement ARIA name computation
-  - [ ] 6.1 Implement accessible name computation algorithm
+- [x] 6. Implement ARIA name computation
+  - [x] 6.1 Implement accessible name computation algorithm
     - Implement aria-label resolution
     - Implement aria-labelledby resolution with ID references
     - Implement text content fallback for elements
@@ -108,7 +108,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Implement name computation priority order per ARIA spec
     - _Requirements: 2.3, 2.8_
 
-  - [ ]* 6.2 Write unit tests for name computation
+  - [x]* 6.2 Write unit tests for name computation
     - Test aria-label takes precedence
     - Test aria-labelledby with single ID
     - Test aria-labelledby with multiple IDs (concatenation)
@@ -117,20 +117,20 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test circular reference handling
     - Test missing ID reference handling
 
-  - [ ] 6.3 Implement accessible description computation
+  - [x] 6.3 Implement accessible description computation
     - Implement aria-describedby resolution
     - Implement title attribute fallback
     - Handle missing ID references with warnings
     - _Requirements: 2.4_
 
-  - [ ]* 6.4 Write unit tests for description computation
+  - [x]* 6.4 Write unit tests for description computation
     - Test aria-describedby with single ID
     - Test aria-describedby with multiple IDs
     - Test title attribute fallback
     - Test missing ID reference handling
 
-- [ ] 7. Implement role extraction
-  - [ ] 7.1 Implement role computation logic
+- [x] 7. Implement role extraction
+  - [x] 7.1 Implement role computation logic
     - Map HTML elements to implicit ARIA roles (button, a[href], h1-h6, nav, main, etc.)
     - Extract explicit role attribute values
     - Validate roles against AccessibleRole type
@@ -138,15 +138,15 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Use implicit role as fallback for invalid explicit roles
     - _Requirements: 2.2, 14.1-14.7_
 
-  - [ ]* 7.2 Write unit tests for role extraction
+  - [x]* 7.2 Write unit tests for role extraction
     - Test implicit roles for native elements (button, a, h1, nav, etc.)
     - Test explicit role attribute override
     - Test invalid role handling
     - Test role="presentation" and role="none"
     - Test all 23 supported roles from V1 scope
 
-- [ ] 8. Implement state and property extraction
-  - [ ] 8.1 Implement state extraction for ARIA attributes
+- [x] 8. Implement state and property extraction
+  - [x] 8.1 Implement state extraction for ARIA attributes
     - Extract aria-expanded (boolean)
     - Extract aria-checked (boolean | 'mixed')
     - Extract aria-pressed (boolean | 'mixed')
@@ -161,42 +161,42 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Extract aria-posinset and aria-setsize for lists (numbers)
     - _Requirements: 2.5, 2.6, 15.1-15.9_
 
-  - [ ]* 8.2 Write unit tests for state extraction
+  - [x]* 8.2 Write unit tests for state extraction
     - Test each supported ARIA attribute extraction
     - Test boolean value parsing (true/false strings)
     - Test mixed state handling
     - Test numeric value parsing (level, posinset, setsize)
     - Test invalid attribute values (emit warning, ignore)
 
-  - [ ] 8.3 Implement value extraction for form controls
+  - [x] 8.3 Implement value extraction for form controls
     - Extract current value for textbox, checkbox, radio, combobox
     - Extract min/max for range widgets
     - Format value text representation
     - _Requirements: 2.6, 14.4_
 
-  - [ ]* 8.4 Write unit tests for value extraction
+  - [x]* 8.4 Write unit tests for value extraction
     - Test textbox value extraction
     - Test checkbox checked state as value
     - Test select element value extraction
     - Test input[type=range] min/max/current
 
-- [ ] 9. Implement focus information extraction
-  - [ ] 9.1 Implement focusability detection
+- [x] 9. Implement focus information extraction
+  - [x] 9.1 Implement focusability detection
     - Detect natively focusable elements (a[href], button, input, select, textarea)
     - Detect tabindex attribute presence and value
     - Determine focusable boolean based on element type and tabindex
     - Extract explicit tabindex value if present
     - _Requirements: 3.1_
 
-  - [ ]* 9.2 Write unit tests for focus detection
+  - [x]* 9.2 Write unit tests for focus detection
     - Test native focusable elements
     - Test tabindex="0" makes element focusable
     - Test tabindex="-1" makes element programmatically focusable
     - Test tabindex > 0 values
     - Test disabled elements are not focusable
 
-- [ ] 10. Implement accessibility tree builder
-  - [ ] 10.1 Create tree traversal and node construction
+- [x] 10. Implement accessibility tree builder
+  - [x] 10.1 Create tree traversal and node construction
     - Traverse DOM tree depth-first
     - For each element, compute role, name, description, state, value, focus
     - Filter inaccessible elements (aria-hidden="true", role="presentation", role="none")
@@ -204,28 +204,28 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Preserve parent-child relationships in tree structure
     - _Requirements: 2.1, 2.7, 3.4_
 
-  - [ ]* 10.2 Write property test for semantic model completeness
+  - [x]* 10.2 Write property test for semantic model completeness
     - **Property 2: Semantic Model Completeness**
     - **Validates: Requirements 2.2, 2.3, 2.5, 2.6, 3.1**
     - Generate random accessible HTML
     - Test all accessible elements have role, name, state, focus
     - Verify no required fields are missing
 
-  - [ ]* 10.3 Write property test for hierarchical structure preservation
+  - [x]* 10.3 Write property test for hierarchical structure preservation
     - **Property 7: Hierarchical Structure Preservation**
     - **Validates: Requirements 3.4**
     - Generate nested HTML structures
     - Test parent-child relationships preserved in model
     - Verify tree depth matches HTML nesting
 
-  - [ ]* 10.4 Write property test for inaccessible element filtering
+  - [x]* 10.4 Write property test for inaccessible element filtering
     - **Property 4: Inaccessible Element Filtering**
     - **Validates: Requirements 2.7**
     - Generate HTML with aria-hidden and presentational roles
     - Test filtered elements not in model
     - Test children of aria-hidden elements also filtered
 
-  - [ ]* 10.5 Write unit tests for tree building
+  - [x]* 10.5 Write unit tests for tree building
     - Test simple single-element tree
     - Test nested elements (list with listitems)
     - Test aria-hidden filtering
@@ -233,7 +233,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test deeply nested structures
     - Test empty document handling
 
-- [ ] 11. Checkpoint - Ensure all tests pass
+- [x] 11. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 12. Implement CSS selector filtering
@@ -303,6 +303,47 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test disabled state
     - Test invalid state
     - Test nested elements (list with items)
+
+- [ ] 14.5 Implement developer-friendly audit report renderer
+  - [ ] 14.5.1 Create audit report generator
+    - Implement tree analysis functions for statistics collection
+    - Count elements by role type (landmarks, headings, interactive, etc.)
+    - Extract landmark structure with nesting
+    - Extract heading hierarchy with levels
+    - Identify interactive elements with states
+    - Calculate focusable element count
+    - Generate summary statistics (total elements, role distribution)
+    - _Requirements: 6.1, 10.3, 10.4_
+
+  - [ ] 14.5.2 Implement accessibility issue detection heuristics
+    - Detect unnamed landmarks (main, navigation, region without aria-label)
+    - Detect heading hierarchy violations (skipped levels: h1 → h3)
+    - Detect missing alt text on images (empty name)
+    - Detect buttons/links without accessible names
+    - Detect form inputs without labels
+    - Detect duplicate landmark roles without distinguishing names
+    - Emit warnings with element context and suggested fixes
+    - _Requirements: 2.3, 2.4, 9.2, 9.4_
+
+  - [ ] 14.5.3 Implement report formatting
+    - Format landmark structure as indented tree
+    - Format heading hierarchy with level indicators
+    - Format interactive elements inventory with states
+    - Format warnings with severity levels (error, warning, info)
+    - Add color coding for terminal output (optional, graceful degradation)
+    - Include summary section with counts and statistics
+    - Make output scannable with clear sections and visual separators
+    - _Requirements: 6.1, 10.3_
+
+  - [ ]* 14.5.4 Write unit tests for audit report
+    - Test landmark structure extraction
+    - Test heading hierarchy analysis
+    - Test interactive element inventory
+    - Test unnamed landmark detection
+    - Test heading skip detection
+    - Test missing name detection
+    - Test report formatting and sections
+    - Test summary statistics accuracy
 
 - [ ] 15. Implement semantic diff functionality
   - [ ] 15.1 Create diff algorithm for accessibility trees
