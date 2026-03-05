@@ -236,30 +236,30 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
 - [x] 11. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 12. Implement CSS selector filtering
-  - [ ] 12.1 Add selector filtering to tree builder
+- [x] 12. Implement CSS selector filtering
+  - [x] 12.1 Add selector filtering to tree builder
     - Accept optional CSS selector parameter
     - Use jsdom querySelector/querySelectorAll to find matching elements
     - Build accessibility tree only for matching elements and their descendants
     - Return error if no elements match selector
     - _Requirements: 8.1, 8.2, 8.3_
 
-  - [ ]* 12.2 Write property test for CSS selector filtering
+  - [x]* 12.2 Write property test for CSS selector filtering
     - **Property 8: CSS Selector Filtering**
     - **Validates: Requirements 8.1, 8.2**
     - Generate HTML with multiple accessible elements
     - Test selector matches all and only expected elements
     - Verify no false positives or false negatives
 
-  - [ ]* 12.3 Write unit tests for selector filtering
+  - [x]* 12.3 Write unit tests for selector filtering
     - Test simple selector (e.g., "button")
     - Test complex selector (e.g., ".class > button[aria-label]")
     - Test multiple matches
     - Test no matches (error case)
     - Test selector with aria-hidden elements
 
-- [ ] 13. Implement NVDA renderer
-  - [ ] 13.1 Create NVDA announcement text generator
+- [x] 13. Implement NVDA renderer
+  - [x] 13.1 Create NVDA announcement text generator
     - Implement renderNode() for each supported role
     - Format button announcements: "[name], button, [state]"
     - Format link announcements: "[name], link"
@@ -271,7 +271,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Traverse tree and concatenate announcements
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-  - [ ]* 13.2 Write unit tests for NVDA renderer
+  - [x]* 13.2 Write unit tests for NVDA renderer
     - Test button announcement format
     - Test link announcement format
     - Test heading with level announcement
@@ -281,8 +281,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test invalid state
     - Test nested elements (list with items)
 
-- [ ] 14. Implement VoiceOver renderer
-  - [ ] 14.1 Create VoiceOver announcement text generator
+- [-] 14. Implement VoiceOver renderer
+  - [x] 14.1 Create VoiceOver announcement text generator
     - Implement renderNode() for each supported role
     - Format button announcements: "[name], button"
     - Format link announcements: "[name], link"
@@ -294,7 +294,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Traverse tree and concatenate announcements
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
-  - [ ]* 14.2 Write unit tests for VoiceOver renderer
+  - [x]* 14.2 Write unit tests for VoiceOver renderer
     - Test button announcement format
     - Test link announcement format
     - Test heading with level announcement (order difference from NVDA)
