@@ -281,7 +281,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test invalid state
     - Test nested elements (list with items)
 
-- [-] 14. Implement VoiceOver renderer
+- [x] 14. Implement VoiceOver renderer
   - [x] 14.1 Create VoiceOver announcement text generator
     - Implement renderNode() for each supported role
     - Format button announcements: "[name], button"
@@ -304,8 +304,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test invalid state
     - Test nested elements (list with items)
 
-- [ ] 14.5 Implement developer-friendly audit report renderer
-  - [ ] 14.5.1 Create audit report generator
+- [x] 14.5 Implement developer-friendly audit report renderer
+  - [x] 14.5.1 Create audit report generator
     - Implement tree analysis functions for statistics collection
     - Count elements by role type (landmarks, headings, interactive, etc.)
     - Extract landmark structure with nesting
@@ -315,7 +315,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Generate summary statistics (total elements, role distribution)
     - _Requirements: 6.1, 10.3, 10.4_
 
-  - [ ] 14.5.2 Implement accessibility issue detection heuristics
+  - [x] 14.5.2 Implement accessibility issue detection heuristics
     - Detect unnamed landmarks (main, navigation, region without aria-label)
     - Detect heading hierarchy violations (skipped levels: h1 → h3)
     - Detect missing alt text on images (empty name)
@@ -325,7 +325,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Emit warnings with element context and suggested fixes
     - _Requirements: 2.3, 2.4, 9.2, 9.4_
 
-  - [ ] 14.5.3 Implement report formatting
+  - [x] 14.5.3 Implement report formatting
     - Format landmark structure as indented tree
     - Format heading hierarchy with level indicators
     - Format interactive elements inventory with states
@@ -335,7 +335,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Make output scannable with clear sections and visual separators
     - _Requirements: 6.1, 10.3_
 
-  - [ ]* 14.5.4 Write unit tests for audit report
+  - [x]* 14.5.4 Write unit tests for audit report
     - Test landmark structure extraction
     - Test heading hierarchy analysis
     - Test interactive element inventory
@@ -345,8 +345,33 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test report formatting and sections
     - Test summary statistics accuracy
 
-- [ ] 15. Implement semantic diff functionality
-  - [ ] 15.1 Create diff algorithm for accessibility trees
+- [x] 14.7 Implement JAWS renderer
+  - [x] 14.7.1 Create JAWS announcement text generator
+    - Implement renderNode() for each supported role
+    - Format button announcements: "[name], button"
+    - Format link announcements: "[name], link"
+    - Format heading announcements: "[name], heading [N]"
+    - Format checkbox announcements: "[name], checkbox, [checked/not checked]"
+    - Format textbox announcements: "[name], edit"
+    - Format landmark announcements: "[name], [landmark type]"
+    - Include state announcements with JAWS-specific phrasing
+    - Handle JAWS-specific terminology (e.g., "clickable" for links, "combo box" for combobox)
+    - Traverse tree and concatenate announcements
+    - _Requirements: 4.1, 4.2, 4.3, 4.4_
+
+  - [x]* 14.7.2 Write unit tests for JAWS renderer
+    - Test button announcement format
+    - Test link announcement format (with "clickable")
+    - Test heading with level announcement
+    - Test checkbox checked/unchecked
+    - Test expanded/collapsed state
+    - Test disabled state
+    - Test invalid state
+    - Test nested elements (list with items)
+    - Test JAWS vs NVDA vs VoiceOver differences
+
+- [x] 15. Implement semantic diff functionality
+  - [x] 15.1 Create diff algorithm for accessibility trees
     - Implement tree comparison algorithm
     - Identify added nodes (present in new tree, not in old)
     - Identify removed nodes (present in old tree, not in new)
@@ -362,26 +387,26 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test all differences detected
     - Verify no false positives or false negatives
 
-  - [ ]* 15.3 Write unit tests for semantic diff
+  - [x]* 15.3 Write unit tests for semantic diff
     - Test added node detection
     - Test removed node detection
     - Test changed property detection (name, role, state)
     - Test unchanged trees (empty diff)
     - Test deeply nested changes
 
-  - [ ] 15.4 Implement diff output formatting
+  - [x] 15.4 Implement diff output formatting
     - Format diff as structured JSON
     - Include old and new values for changed properties
     - Include JSON paths for all changes
     - Make output diff-friendly for CI tools
     - _Requirements: 13.6, 12.4_
 
-  - [ ]* 15.5 Write unit tests for diff formatting
+  - [x]* 15.5 Write unit tests for diff formatting
     - Test JSON output structure
     - Test readability of diff output
     - Test empty diff formatting
 
-- [ ] 16. Checkpoint - Ensure all tests pass
+- [x] 16. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 17. Implement CLI interface

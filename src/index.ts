@@ -5,3 +5,4 @@
  */
 
 export * from './model/index.js';
+export * from './diff/index.js';
