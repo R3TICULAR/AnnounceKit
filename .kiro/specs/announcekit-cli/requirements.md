@@ -2,9 +2,9 @@
 
 ## Introduction
 
-AnnounceKit is a developer-focused CLI tool that analyzes static HTML to produce a normalized accessibility announcement model and approximate screen reader output. The tool addresses the challenge of OS-fragmented screen reader testing by providing deterministic semantic analysis and heuristic announcement rendering for NVDA and VoiceOver.
+AnnounceKit is a developer-focused CLI tool that analyzes static HTML to produce a normalized accessibility announcement model and approximate screen reader output. The tool addresses the challenge of OS-fragmented screen reader testing by providing deterministic semantic analysis and heuristic announcement rendering for NVDA, JAWS, and VoiceOver.
 
-The tool separates semantic modeling (deterministic accessibility tree properties) from screen reader phrasing logic (heuristic approximations), enabling CI validation, semantic diffing, and cross-platform debugging without requiring access to multiple operating systems.
+The tool separates semantic modeling (deterministic accessibility tree properties) from screen reader phrasing logic (heuristic approximations), enabling CI validation, semantic diffing, and cross-platform debugging without requiring access to multiple operating systems or screen reader licenses.
 
 ## Glossary
 
@@ -14,6 +14,7 @@ The tool separates semantic modeling (deterministic accessibility tree propertie
 - **Semantic_Model**: Normalized, deterministic representation of accessibility properties
 - **Screen_Reader_Renderer**: Component that generates approximate announcement text
 - **NVDA_Renderer**: Screen reader renderer for NVDA-style output
+- **JAWS_Renderer**: Screen reader renderer for JAWS-style output
 - **VoiceOver_Renderer**: Screen reader renderer for VoiceOver-style output
 - **Announcement_Output**: The final text representation of how content would be announced
 - **CI_Pipeline**: Continuous Integration automation environment
@@ -83,6 +84,18 @@ The tool separates semantic modeling (deterministic accessibility tree propertie
 3. THE VoiceOver_Renderer SHALL include state announcements following VoiceOver conventions
 4. THE VoiceOver_Renderer SHALL format announcement text with VoiceOver-style punctuation and phrasing
 5. THE CLI SHALL document that VoiceOver output is heuristic and may differ from actual VoiceOver behavior
+
+### Requirement 5.5: JAWS Announcement Rendering
+
+**User Story:** As a frontend engineer, I want approximate JAWS announcement output, so that I can debug JAWS screen reader issues without requiring a JAWS license or Windows machine.
+
+#### Acceptance Criteria
+
+1. WHEN the JAWS renderer is selected, THE JAWS_Renderer SHALL generate announcement text approximating JAWS behavior
+2. THE JAWS_Renderer SHALL include role announcements following JAWS conventions
+3. THE JAWS_Renderer SHALL include state announcements following JAWS conventions
+4. THE JAWS_Renderer SHALL format announcement text with JAWS-specific terminology (e.g., "clickable" for links, "combo box" for combobox)
+5. THE CLI SHALL document that JAWS output is heuristic and may differ from actual JAWS behavior
 
 ### Requirement 6: Output Format Options
 

@@ -29,6 +29,16 @@ export interface TreeBuildResult {
 }
 
 /**
+ * Error thrown when selector filtering fails.
+ */
+export class SelectorError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'SelectorError';
+  }
+}
+
+/**
  * Builds an accessibility tree from a DOM element.
  * 
  * Traverses the DOM tree depth-first, applies all extractors,
@@ -61,6 +71,57 @@ export function buildAccessibilityTree(
   };
   
   return { model, warnings };
+}
+
+/**
+ * Builds accessibility trees for elements matching a CSS selector.
+ * 
+ * Uses querySelector/querySelectorAll to find matching elements,
+ * then builds an accessibility tree for each match.
+ * 
+ * @param rootElement - Root DOM element to search within
+ * @param selector - CSS selector to match elements
+ * @param sourceHash - Optional hash of source HTML for change detection
+ * @returns Array of announcement models and warnings
+ * @throws SelectorError if no elements match the selector
+ */
+export function buildAccessibilityTreeWithSelector(
+  rootElement: Element,
+  selector: string,
+  sourceHash?: string
+): TreeBuildResult[] {
+  const document = rootElement.ownerDocument;
+  if (!document) {
+    throw new SelectorError('Element has no owner document');
+  }
+  
+  // Find all matching elements
+  let matchingElements: Element[];
+  try {
+    // Check if rootElement itself matches
+    if (rootElement.matches(selector)) {
+      matchingElements = [rootElement];
+    } else {
+      // Query for matching descendants
+      matchingElements = Array.from(rootElement.querySelectorAll(selector));
+    }
+  } catch (error) {
+    throw new SelectorError(`Invalid CSS selector: "${selector}". ${error instanceof Error ? error.message : String(error)}`);
+  }
+  
+  // Error if no matches found
+  if (matchingElements.length === 0) {
+    throw new SelectorError(`No elements match selector: "${selector}"`);
+  }
+  
+  // Build accessibility tree for each matching element
+  const results: TreeBuildResult[] = [];
+  for (const element of matchingElements) {
+    const result = buildAccessibilityTree(element, sourceHash);
+    results.push(result);
+  }
+  
+  return results;
 }
 
 /**

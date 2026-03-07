@@ -236,30 +236,30 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
 - [x] 11. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 12. Implement CSS selector filtering
-  - [ ] 12.1 Add selector filtering to tree builder
+- [x] 12. Implement CSS selector filtering
+  - [x] 12.1 Add selector filtering to tree builder
     - Accept optional CSS selector parameter
     - Use jsdom querySelector/querySelectorAll to find matching elements
     - Build accessibility tree only for matching elements and their descendants
     - Return error if no elements match selector
     - _Requirements: 8.1, 8.2, 8.3_
 
-  - [ ]* 12.2 Write property test for CSS selector filtering
+  - [x]* 12.2 Write property test for CSS selector filtering
     - **Property 8: CSS Selector Filtering**
     - **Validates: Requirements 8.1, 8.2**
     - Generate HTML with multiple accessible elements
     - Test selector matches all and only expected elements
     - Verify no false positives or false negatives
 
-  - [ ]* 12.3 Write unit tests for selector filtering
+  - [x]* 12.3 Write unit tests for selector filtering
     - Test simple selector (e.g., "button")
     - Test complex selector (e.g., ".class > button[aria-label]")
     - Test multiple matches
     - Test no matches (error case)
     - Test selector with aria-hidden elements
 
-- [ ] 13. Implement NVDA renderer
-  - [ ] 13.1 Create NVDA announcement text generator
+- [x] 13. Implement NVDA renderer
+  - [x] 13.1 Create NVDA announcement text generator
     - Implement renderNode() for each supported role
     - Format button announcements: "[name], button, [state]"
     - Format link announcements: "[name], link"
@@ -271,7 +271,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Traverse tree and concatenate announcements
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-  - [ ]* 13.2 Write unit tests for NVDA renderer
+  - [x]* 13.2 Write unit tests for NVDA renderer
     - Test button announcement format
     - Test link announcement format
     - Test heading with level announcement
@@ -281,8 +281,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test invalid state
     - Test nested elements (list with items)
 
-- [ ] 14. Implement VoiceOver renderer
-  - [ ] 14.1 Create VoiceOver announcement text generator
+- [x] 14. Implement VoiceOver renderer
+  - [x] 14.1 Create VoiceOver announcement text generator
     - Implement renderNode() for each supported role
     - Format button announcements: "[name], button"
     - Format link announcements: "[name], link"
@@ -294,7 +294,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Traverse tree and concatenate announcements
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
-  - [ ]* 14.2 Write unit tests for VoiceOver renderer
+  - [x]* 14.2 Write unit tests for VoiceOver renderer
     - Test button announcement format
     - Test link announcement format
     - Test heading with level announcement (order difference from NVDA)
@@ -304,8 +304,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test invalid state
     - Test nested elements (list with items)
 
-- [ ] 14.5 Implement developer-friendly audit report renderer
-  - [ ] 14.5.1 Create audit report generator
+- [x] 14.5 Implement developer-friendly audit report renderer
+  - [x] 14.5.1 Create audit report generator
     - Implement tree analysis functions for statistics collection
     - Count elements by role type (landmarks, headings, interactive, etc.)
     - Extract landmark structure with nesting
@@ -315,7 +315,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Generate summary statistics (total elements, role distribution)
     - _Requirements: 6.1, 10.3, 10.4_
 
-  - [ ] 14.5.2 Implement accessibility issue detection heuristics
+  - [x] 14.5.2 Implement accessibility issue detection heuristics
     - Detect unnamed landmarks (main, navigation, region without aria-label)
     - Detect heading hierarchy violations (skipped levels: h1 → h3)
     - Detect missing alt text on images (empty name)
@@ -325,7 +325,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Emit warnings with element context and suggested fixes
     - _Requirements: 2.3, 2.4, 9.2, 9.4_
 
-  - [ ] 14.5.3 Implement report formatting
+  - [x] 14.5.3 Implement report formatting
     - Format landmark structure as indented tree
     - Format heading hierarchy with level indicators
     - Format interactive elements inventory with states
@@ -335,7 +335,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Make output scannable with clear sections and visual separators
     - _Requirements: 6.1, 10.3_
 
-  - [ ]* 14.5.4 Write unit tests for audit report
+  - [x]* 14.5.4 Write unit tests for audit report
     - Test landmark structure extraction
     - Test heading hierarchy analysis
     - Test interactive element inventory
@@ -345,8 +345,33 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test report formatting and sections
     - Test summary statistics accuracy
 
-- [ ] 15. Implement semantic diff functionality
-  - [ ] 15.1 Create diff algorithm for accessibility trees
+- [x] 14.7 Implement JAWS renderer
+  - [x] 14.7.1 Create JAWS announcement text generator
+    - Implement renderNode() for each supported role
+    - Format button announcements: "[name], button"
+    - Format link announcements: "[name], link"
+    - Format heading announcements: "[name], heading [N]"
+    - Format checkbox announcements: "[name], checkbox, [checked/not checked]"
+    - Format textbox announcements: "[name], edit"
+    - Format landmark announcements: "[name], [landmark type]"
+    - Include state announcements with JAWS-specific phrasing
+    - Handle JAWS-specific terminology (e.g., "clickable" for links, "combo box" for combobox)
+    - Traverse tree and concatenate announcements
+    - _Requirements: 4.1, 4.2, 4.3, 4.4_
+
+  - [x]* 14.7.2 Write unit tests for JAWS renderer
+    - Test button announcement format
+    - Test link announcement format (with "clickable")
+    - Test heading with level announcement
+    - Test checkbox checked/unchecked
+    - Test expanded/collapsed state
+    - Test disabled state
+    - Test invalid state
+    - Test nested elements (list with items)
+    - Test JAWS vs NVDA vs VoiceOver differences
+
+- [x] 15. Implement semantic diff functionality
+  - [x] 15.1 Create diff algorithm for accessibility trees
     - Implement tree comparison algorithm
     - Identify added nodes (present in new tree, not in old)
     - Identify removed nodes (present in old tree, not in new)
@@ -362,37 +387,37 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test all differences detected
     - Verify no false positives or false negatives
 
-  - [ ]* 15.3 Write unit tests for semantic diff
+  - [x]* 15.3 Write unit tests for semantic diff
     - Test added node detection
     - Test removed node detection
     - Test changed property detection (name, role, state)
     - Test unchanged trees (empty diff)
     - Test deeply nested changes
 
-  - [ ] 15.4 Implement diff output formatting
+  - [x] 15.4 Implement diff output formatting
     - Format diff as structured JSON
     - Include old and new values for changed properties
     - Include JSON paths for all changes
     - Make output diff-friendly for CI tools
     - _Requirements: 13.6, 12.4_
 
-  - [ ]* 15.5 Write unit tests for diff formatting
+  - [x]* 15.5 Write unit tests for diff formatting
     - Test JSON output structure
     - Test readability of diff output
     - Test empty diff formatting
 
-- [ ] 16. Checkpoint - Ensure all tests pass
+- [x] 16. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 17. Implement CLI interface
-  - [ ] 17.1 Set up Commander.js CLI framework
+- [x] 17. Implement CLI interface
+  - [x] 17.1 Set up Commander.js CLI framework
     - Initialize Commander program
     - Define command name, version, description
     - Add --version flag
     - Add --help flag with usage examples
     - _Requirements: 10.1, 10.2_
 
-  - [ ] 17.2 Implement command-line argument parsing
+  - [x] 17.2 Implement command-line argument parsing
     - Add input option (file path or stdin indicator)
     - Add --output/-o option for output file path
     - Add --format/-f option (json, text, both)
@@ -403,7 +428,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Set default values (format: json, screen-reader: nvda, output: stdout)
     - _Requirements: 1.4, 1.5, 6.1, 6.2, 6.3, 6.4, 7.1, 7.2, 7.3, 8.1, 11.2, 13.1_
 
-  - [ ]* 17.3 Write unit tests for argument parsing
+  - [x]* 17.3 Write unit tests for argument parsing
     - Test default values
     - Test file input parsing
     - Test stdin input parsing
@@ -414,22 +439,22 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test diff mode option
     - Test invalid arguments (error handling)
 
-- [ ] 18. Implement file I/O operations
-  - [ ] 18.1 Create file reading functions
+- [x] 18. Implement file I/O operations
+  - [x] 18.1 Create file reading functions
     - Implement readHTMLFromFile() using fs.readFileSync
     - Implement readHTMLFromStdin() using process.stdin
     - Handle file not found errors with clear messages
     - Handle permission errors with clear messages
     - _Requirements: 1.1, 1.2, 1.4, 1.5, 9.3_
 
-  - [ ] 18.2 Create file writing functions
+  - [x] 18.2 Create file writing functions
     - Implement writeOutputToFile() using fs.writeFileSync
     - Implement writeOutputToStdout() using console.log
     - Handle write permission errors
     - Handle disk full errors
     - _Requirements: 6.4, 6.5, 9.3_
 
-  - [ ]* 18.3 Write unit tests for file I/O
+  - [x]* 18.3 Write unit tests for file I/O
     - Test file reading with valid path
     - Test file reading with invalid path (error)
     - Test stdin reading
@@ -437,8 +462,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test stdout writing
     - Test permission errors
 
-- [ ] 19. Implement CLI orchestration and output formatting
-  - [ ] 19.1 Wire all components together in main CLI function
+- [x] 19. Implement CLI orchestration and output formatting
+  - [x] 19.1 Wire all components together in main CLI function
     - Parse command-line arguments
     - Read HTML input (file or stdin)
     - Parse HTML using HTML parser
@@ -451,14 +476,14 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Handle errors and exit with appropriate codes
     - _Requirements: 3.1, 6.1, 6.2, 6.3, 7.2, 7.3, 9.1, 9.5, 12.1_
 
-  - [ ] 19.2 Implement output formatting for different modes
+  - [x] 19.2 Implement output formatting for different modes
     - Format JSON output with pretty printing
     - Format text output with announcement text
     - Format combined output (JSON + text)
     - Format diff output with structured changes
     - _Requirements: 6.1, 6.2, 6.3_
 
-  - [ ] 19.3 Implement error handling and user feedback
+  - [x] 19.3 Implement error handling and user feedback
     - Catch and format parsing errors
     - Catch and format extraction errors
     - Catch and format I/O errors
@@ -475,8 +500,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test diff mode end-to-end
     - Test error cases (file not found, invalid HTML, no selector matches)
 
-- [ ] 20. Implement validation mode
-  - [ ] 20.1 Create round-trip validation function
+- [x] 20. Implement validation mode
+  - [x] 20.1 Create round-trip validation function
     - Parse HTML and extract model
     - Serialize model to JSON
     - Deserialize JSON back to model
@@ -489,8 +514,8 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Test validation failure detection
     - Test validation output format
 
-- [ ] 21. Implement batch processing support
-  - [ ] 21.1 Add batch mode to CLI
+- [-] 21. Implement batch processing support
+  - [x] 21.1 Add batch mode to CLI
     - Accept multiple file paths as input
     - Process each file independently
     - Collect results for all files
@@ -498,7 +523,7 @@ The implementation uses TypeScript + Node.js with jsdom for HTML parsing, Comman
     - Continue processing on individual file errors
     - _Requirements: 12.5_
 
-  - [ ]* 21.2 Write integration tests for batch processing
+  - [-]* 21.2 Write integration tests for batch processing
     - Test multiple file processing
     - Test error handling in batch mode (one file fails, others continue)
     - Test output format for batch results
