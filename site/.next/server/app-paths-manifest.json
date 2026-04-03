@@ -1,7 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/settings/page": "app/settings/page.js",
-  "/docs/usage-guide/page": "app/docs/usage-guide/page.js",
-  "/docs/cicd-integration/page": "app/docs/cicd-integration/page.js",
-  "/docs/page": "app/docs/page.js"
-}
