@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"components/AxeDevTools.tsx -> axe-core\":{\"id\":\"components/AxeDevTools.tsx -> axe-core\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_axe-core_axe_js.js\"]}}"
