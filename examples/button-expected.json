@@ -1,0 +1,22 @@
+{
+  "description": "Expected output for button.html (first button only with --selector 'button:first-of-type')",
+  "command": "announcekit examples/button.html --selector 'button:first-of-type'",
+  "json": {
+    "version": { "major": 1, "minor": 0 },
+    "root": {
+      "role": "button",
+      "name": "Click me",
+      "state": {},
+      "focus": {
+        "focusable": true
+      },
+      "children": []
+    },
+    "metadata": {
+      "extractedAt": "2024-01-15T10:30:00.000Z"
+    }
+  },
+  "nvda": "Click me, button",
+  "jaws": "Click me, button",
+  "voiceover": "Click me, button"
+}

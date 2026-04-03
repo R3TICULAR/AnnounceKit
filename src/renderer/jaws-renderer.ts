@@ -234,7 +234,7 @@ function formatStatesJAWS(node: AccessibleNode): string {
   }
   
   // Current state
-  if (node.state.current && node.state.current !== false) {
+  if (node.state.current) {
     switch (node.state.current) {
       case 'page':
         states.push('current page');
