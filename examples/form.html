@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Examples</title>
+</head>
+<body>
+  <form>
+    <!-- Text input with label -->
+    <label for="username">Username</label>
+    <input id="username" type="text" required>
+
+    <!-- Email input with validation -->
+    <label for="email">Email address</label>
+    <input id="email" type="email" required aria-invalid="true" value="invalid@">
+    <span id="email-error">Please enter a valid email address</span>
+
+    <!-- Password input -->
+    <label for="password">Password</label>
+    <input id="password" type="password" required>
+
+    <!-- Checkbox -->
+    <input id="terms" type="checkbox">
+    <label for="terms">I accept the terms and conditions</label>
+
+    <!-- Radio buttons -->
+    <fieldset>
+      <legend>Choose a plan</legend>
+      <input id="plan-free" type="radio" name="plan" value="free" checked>
+      <label for="plan-free">Free</label>
+      
+      <input id="plan-pro" type="radio" name="plan" value="pro">
+      <label for="plan-pro">Pro</label>
+    </fieldset>
+
+    <!-- Select dropdown -->
+    <label for="country">Country</label>
+    <select id="country">
+      <option value="">Select a country</option>
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="ca">Canada</option>
+    </select>
+
+    <!-- Textarea -->
+    <label for="comments">Comments</label>
+    <textarea id="comments" rows="4"></textarea>
+
+    <!-- Submit button -->
+    <button type="submit">Submit form</button>
+  </form>
+</body>
+</html>

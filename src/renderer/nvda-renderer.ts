@@ -228,7 +228,7 @@ function formatStatesNVDA(node: AccessibleNode): string {
   }
   
   // Current state
-  if (node.state.current && node.state.current !== false) {
+  if (node.state.current) {
     if (node.state.current === 'page') {
       states.push('current page');
     } else if (node.state.current === 'step') {
