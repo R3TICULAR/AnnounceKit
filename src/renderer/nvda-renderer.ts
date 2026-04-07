@@ -160,6 +160,59 @@ function formatRoleNVDA(node: AccessibleNode): string {
       // Generic containers are typically not announced
       return '';
     
+    case 'staticText':
+    case 'paragraph':
+    case 'cell':
+    case 'term':
+    case 'definition':
+    case 'caption':
+      return '';
+    
+    case 'blockquote':
+      return 'block quote';
+    
+    case 'code':
+      return 'code';
+    
+    case 'table':
+      return 'table';
+    
+    case 'row':
+      return 'row';
+    
+    case 'columnheader':
+      return 'column header';
+    
+    case 'rowheader':
+      return 'row header';
+    
+    case 'figure':
+      return 'figure';
+    
+    case 'dialog':
+      return 'dialog';
+    
+    case 'meter':
+      return 'meter';
+    
+    case 'progressbar':
+      return 'progress bar';
+    
+    case 'status':
+      return 'status';
+    
+    case 'group':
+      return node.name ? 'grouping' : '';
+    
+    case 'document':
+      return 'document';
+    
+    case 'application':
+      return 'embedded object';
+    
+    case 'separator':
+      return 'separator';
+    
     default:
       return role;
   }

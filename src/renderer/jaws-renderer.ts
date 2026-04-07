@@ -162,6 +162,69 @@ function formatRoleJAWS(node: AccessibleNode): string {
       // Generic containers typically not announced
       return '';
     
+    case 'staticText':
+    case 'paragraph':
+    case 'term':
+    case 'definition':
+    case 'caption':
+      return '';
+    
+    case 'blockquote':
+      return 'block quote';
+    
+    case 'code':
+      return 'code';
+    
+    case 'table': {
+      const rows = node.children.filter(c => c.role === 'row');
+      const rowCount = rows.length;
+      const colCount = rows.length > 0 ? rows[0].children.length : 0;
+      return `table with ${rowCount} rows and ${colCount} columns`;
+    }
+    
+    case 'row': {
+      const pos = node.state.posinset ?? 0;
+      return `row ${pos}`;
+    }
+    
+    case 'cell': {
+      const pos = node.state.posinset ?? 0;
+      return `column ${pos}`;
+    }
+    
+    case 'columnheader':
+      return 'column header';
+    
+    case 'rowheader':
+      return 'row header';
+    
+    case 'figure':
+      return 'figure';
+    
+    case 'dialog':
+      return 'dialog';
+    
+    case 'meter':
+      return 'meter';
+    
+    case 'progressbar':
+      return 'progress bar';
+    
+    case 'status':
+      return 'status';
+    
+    case 'group':
+      return node.name ? 'group' : '';
+    
+    case 'document':
+      return 'frame';
+    
+    case 'application':
+      return 'embedded object';
+    
+    case 'separator':
+      return 'separator';
+    
     default:
       return role;
   }

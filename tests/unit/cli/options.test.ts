@@ -29,6 +29,7 @@ describe('validateOptions', () => {
       selector: undefined,
       validate: false,
       diff: undefined,
+      batch: false,
     });
   });
 
@@ -307,6 +308,7 @@ describe('integration tests', () => {
       selector: '.button',
       validate: true,
       diff: 'old.html',
+      batch: false,
     });
 
     expect(parsedInput).toEqual({

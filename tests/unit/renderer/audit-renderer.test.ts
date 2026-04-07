@@ -21,7 +21,7 @@ describe('generateAuditReport', () => {
       const result = buildAccessibilityTree(div);
       const report = generateAuditReport(result.model);
       
-      expect(report.statistics.totalElements).toBe(3);
+      expect(report.statistics.totalElements).toBe(6);
     });
 
     it('should track role distribution', () => {

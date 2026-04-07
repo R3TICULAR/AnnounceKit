@@ -19,6 +19,7 @@ export interface ModelVersion {
  * V1 supports common interactive and structural roles.
  */
 export type AccessibleRole =
+  // Interactive elements
   | 'button'
   | 'link'
   | 'heading'
@@ -28,19 +29,49 @@ export type AccessibleRole =
   | 'combobox'
   | 'listbox'
   | 'option'
+  // Structural
   | 'list'
   | 'listitem'
+  | 'article'
+  | 'generic'
+  // Landmarks
   | 'navigation'
   | 'main'
   | 'banner'
   | 'contentinfo'
   | 'region'
   | 'img'
-  | 'article'
   | 'complementary'
   | 'form'
   | 'search'
-  | 'generic';
+  // Static content (new)
+  | 'paragraph'
+  | 'blockquote'
+  | 'code'
+  | 'staticText'
+  // Tables (new)
+  | 'table'
+  | 'row'
+  | 'cell'
+  | 'columnheader'
+  | 'rowheader'
+  // Definition lists (new)
+  | 'term'
+  | 'definition'
+  // Figures (new)
+  | 'figure'
+  | 'caption'
+  // Grouping & disclosure (new)
+  | 'group'
+  | 'dialog'
+  // Widgets (new)
+  | 'meter'
+  | 'progressbar'
+  | 'status'
+  // Embedded content (new)
+  | 'document'
+  | 'application'
+  | 'separator';
 
 /**
  * Accessible states and properties.
@@ -171,6 +202,7 @@ export interface AnnouncementModel {
  * Supported roles as a constant array for validation.
  */
 export const SUPPORTED_ROLES: readonly AccessibleRole[] = [
+  // Original roles (22)
   'button',
   'link',
   'heading',
@@ -193,6 +225,28 @@ export const SUPPORTED_ROLES: readonly AccessibleRole[] = [
   'form',
   'search',
   'generic',
+  // New roles (21)
+  'paragraph',
+  'blockquote',
+  'code',
+  'staticText',
+  'table',
+  'row',
+  'cell',
+  'columnheader',
+  'rowheader',
+  'term',
+  'definition',
+  'figure',
+  'caption',
+  'group',
+  'dialog',
+  'meter',
+  'progressbar',
+  'status',
+  'document',
+  'application',
+  'separator',
 ] as const;
 
 /**

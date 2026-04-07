@@ -135,10 +135,11 @@ describe('Tree Structure Properties', () => {
             
             const result = buildAccessibilityTree(root);
             
-            // Count depth in accessibility tree
+            // Count depth in accessibility tree (only counting non-staticText nodes)
             const countDepth = (node: AccessibleNode): number => {
-              if (node.children.length === 0) return 1;
-              return 1 + Math.max(...node.children.map(countDepth));
+              const nonTextChildren = node.children.filter(c => c.role !== 'staticText');
+              if (nonTextChildren.length === 0) return 1;
+              return 1 + Math.max(...nonTextChildren.map(countDepth));
             };
             
             const treeDepth = countDepth(result.model.root);
@@ -228,12 +229,14 @@ describe('Tree Structure Properties', () => {
             
             const result = buildAccessibilityTree(div);
             
-            // Should have totalButtons - 1 children (first has presentation role)
-            expect(result.model.root.children).toHaveLength(totalButtons - 1);
+            // Buttons with roles should be present; presentation button's text
+            // is promoted as staticText via transparent traversal
+            const buttonChildren = result.model.root.children.filter(c => c.role === 'button');
+            expect(buttonChildren).toHaveLength(totalButtons - 1);
             
-            // First button should not be in tree
-            const names = result.model.root.children.map(c => c.name);
-            expect(names).not.toContain('Button 0');
+            // First button should not be in tree as a button
+            const buttonNames = buttonChildren.map(c => c.name);
+            expect(buttonNames).not.toContain('Button 0');
           }
         ),
         { numRuns: 100 }
@@ -258,12 +261,16 @@ describe('Tree Structure Properties', () => {
             
             const result = buildAccessibilityTree(div);
             
-            // Should only have buttons (spans have no accessible role)
-            expect(result.model.root.children).toHaveLength(numButtons);
-            result.model.root.children.forEach((child, i) => {
+            // Should have buttons plus staticText nodes from spans (transparent traversal)
+            const buttonChildren = result.model.root.children.filter(c => c.role === 'button');
+            const textChildren = result.model.root.children.filter(c => c.role === 'staticText');
+            expect(buttonChildren).toHaveLength(numButtons);
+            buttonChildren.forEach((child, i) => {
               expect(child.role).toBe('button');
               expect(child.name).toBe(`Button ${i}`);
             });
+            // Span text content promoted as staticText nodes
+            expect(textChildren).toHaveLength(numButtons);
           }
         ),
         { numRuns: 100 }

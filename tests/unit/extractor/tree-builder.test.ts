@@ -19,7 +19,12 @@ describe('buildAccessibilityTree', () => {
         name: 'Click me',
         state: {},
         focus: { focusable: true },
-        children: [],
+      });
+      // Text content captured as staticText child
+      expect(result.model.root.children).toHaveLength(1);
+      expect(result.model.root.children[0]).toMatchObject({
+        role: 'staticText',
+        name: 'Click me',
       });
     });
 
@@ -34,7 +39,12 @@ describe('buildAccessibilityTree', () => {
         name: 'Home',
         state: {},
         focus: { focusable: true },
-        children: [],
+      });
+      // Text content captured as staticText child
+      expect(result.model.root.children).toHaveLength(1);
+      expect(result.model.root.children[0]).toMatchObject({
+        role: 'staticText',
+        name: 'Home',
       });
     });
 
@@ -49,7 +59,12 @@ describe('buildAccessibilityTree', () => {
         name: 'Section Title',
         state: { level: 2 },
         focus: { focusable: false },
-        children: [],
+      });
+      // Text content captured as staticText child
+      expect(result.model.root.children).toHaveLength(1);
+      expect(result.model.root.children[0]).toMatchObject({
+        role: 'staticText',
+        name: 'Section Title',
       });
     });
 
@@ -196,12 +211,14 @@ describe('buildAccessibilityTree', () => {
       
       const result = buildAccessibilityTree(div);
       
-      // Generic container with only visible button
-      expect(result.model.root.children).toHaveLength(1);
-      expect(result.model.root.children[0]).toMatchObject({
-        role: 'button',
-        name: 'Visible',
-      });
+      // Generic container with visible button; presentation button's text is
+      // promoted via transparent traversal as a staticText node
+      const buttonChildren = result.model.root.children.filter(c => c.role === 'button');
+      const textChildren = result.model.root.children.filter(c => c.role === 'staticText');
+      expect(buttonChildren).toHaveLength(1);
+      expect(buttonChildren[0]).toMatchObject({ role: 'button', name: 'Visible' });
+      // "Presentational" text promoted through role-less (presentation) element
+      expect(textChildren.some(t => t.name === 'Presentational')).toBe(true);
     });
 
     it('should filter elements with role="none"', () => {
@@ -215,12 +232,14 @@ describe('buildAccessibilityTree', () => {
       
       const result = buildAccessibilityTree(div);
       
-      // Generic container with only visible button
-      expect(result.model.root.children).toHaveLength(1);
-      expect(result.model.root.children[0]).toMatchObject({
-        role: 'button',
-        name: 'Visible',
-      });
+      // Generic container with visible button; none button's text is
+      // promoted via transparent traversal as a staticText node
+      const buttonChildren = result.model.root.children.filter(c => c.role === 'button');
+      const textChildren = result.model.root.children.filter(c => c.role === 'staticText');
+      expect(buttonChildren).toHaveLength(1);
+      expect(buttonChildren[0]).toMatchObject({ role: 'button', name: 'Visible' });
+      // "None" text promoted through role-less (none) element
+      expect(textChildren.some(t => t.name === 'None')).toBe(true);
     });
 
     it('should filter elements without accessible role', () => {
@@ -235,12 +254,14 @@ describe('buildAccessibilityTree', () => {
       
       const result = buildAccessibilityTree(div);
       
-      // Generic container with only button
-      expect(result.model.root.children).toHaveLength(1);
-      expect(result.model.root.children[0]).toMatchObject({
-        role: 'button',
-        name: 'Accessible',
-      });
+      // Button is present; text from role-less div/span promoted as staticText
+      const buttonChildren = result.model.root.children.filter(c => c.role === 'button');
+      expect(buttonChildren).toHaveLength(1);
+      expect(buttonChildren[0]).toMatchObject({ role: 'button', name: 'Accessible' });
+      // Text nodes from role-less elements are promoted via transparent traversal
+      const textChildren = result.model.root.children.filter(c => c.role === 'staticText');
+      expect(textChildren.some(t => t.name === 'Not accessible')).toBe(true);
+      expect(textChildren.some(t => t.name === 'Also not accessible')).toBe(true);
     });
 
     it('should filter nested aria-hidden elements', () => {
@@ -395,10 +416,13 @@ describe('buildAccessibilityTree', () => {
       const result = buildAccessibilityTree(form);
       
       expect(result.model.root.role).toBe('form');
-      expect(result.model.root.children).toHaveLength(2); // input and button (label is not accessible)
+      // label text is promoted as staticText via transparent traversal, plus input and button
+      const inputChildren = result.model.root.children.filter(c => c.role === 'textbox');
+      const buttonChildren = result.model.root.children.filter(c => c.role === 'button');
+      expect(inputChildren).toHaveLength(1);
+      expect(buttonChildren).toHaveLength(1);
       
-      const input = result.model.root.children[0];
-      expect(input).toMatchObject({
+      expect(inputChildren[0]).toMatchObject({
         role: 'textbox',
         name: 'Email',
         value: {
@@ -411,8 +435,7 @@ describe('buildAccessibilityTree', () => {
         },
       });
       
-      const button = result.model.root.children[1];
-      expect(button).toMatchObject({
+      expect(buttonChildren[0]).toMatchObject({
         role: 'button',
         name: 'Submit',
       });

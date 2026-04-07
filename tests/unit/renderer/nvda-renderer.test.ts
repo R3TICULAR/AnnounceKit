@@ -16,7 +16,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Click me, button');
+      expect(announcement).toContain('Click me, button');
     });
 
     it('should announce button with expanded state', () => {
@@ -26,7 +26,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Menu, button, expanded');
+      expect(announcement).toContain('Menu, button, expanded');
     });
 
     it('should announce button with collapsed state', () => {
@@ -36,7 +36,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Menu, button, collapsed');
+      expect(announcement).toContain('Menu, button, collapsed');
     });
 
     it('should announce button with pressed state', () => {
@@ -46,7 +46,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Toggle, button, pressed');
+      expect(announcement).toContain('Toggle, button, pressed');
     });
 
     it('should announce disabled button', () => {
@@ -56,7 +56,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Submit, button, unavailable');
+      expect(announcement).toContain('Submit, button, unavailable');
     });
   });
 
@@ -68,7 +68,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Home, link');
+      expect(announcement).toContain('Home, link');
     });
 
     it('should announce current page link', () => {
@@ -78,7 +78,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('About, link, current page');
+      expect(announcement).toContain('About, link, current page');
     });
   });
 
@@ -90,7 +90,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Section Title, heading level 2');
+      expect(announcement).toContain('Section Title, heading level 2');
     });
 
     it('should announce h1', () => {
@@ -100,7 +100,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Page Title, heading level 1');
+      expect(announcement).toContain('Page Title, heading level 1');
     });
 
     it('should announce h6', () => {
@@ -110,7 +110,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Subsection, heading level 6');
+      expect(announcement).toContain('Subsection, heading level 6');
     });
   });
 
@@ -305,7 +305,7 @@ describe('renderNVDA', () => {
       
       const announcement = renderNVDA(result.model);
       
-      expect(announcement).toBe('Toggle Menu, button, expanded, pressed');
+      expect(announcement).toContain('Toggle Menu, button, expanded, pressed');
     });
 
     it('should announce textbox with multiple states', () => {

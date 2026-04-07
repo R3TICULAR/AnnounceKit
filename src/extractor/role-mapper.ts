@@ -63,6 +63,52 @@ const IMPLICIT_ROLE_MAP: Record<string, AccessibleRole> = {
   
   // Articles
   'article': 'article',
+
+  // Static content (new)
+  'p': 'paragraph',
+  'blockquote': 'blockquote',
+  'code': 'code',
+  'pre': 'code',
+
+  // Tables (new)
+  'table': 'table',
+  'tr': 'row',
+  'td': 'cell',
+  'th': 'columnheader', // Default; scope="row" handled in computeImplicitRole
+
+  // Definition lists (new)
+  'dl': 'list',
+  'dt': 'term',
+  'dd': 'definition',
+
+  // Figures (new)
+  'figure': 'figure',
+  'figcaption': 'caption',
+
+  // Disclosure (new)
+  'details': 'group',
+  'summary': 'button',
+
+  // Dialogs and widgets (new)
+  'dialog': 'dialog',
+  'meter': 'meter',
+  'progress': 'progressbar',
+  'output': 'status',
+
+  // Forms (new)
+  'fieldset': 'group',
+  'legend': 'caption',
+
+  // Embedded content (new)
+  'iframe': 'document',
+  'video': 'application',
+  'audio': 'application',
+
+  // Separators (new)
+  'hr': 'separator',
+
+  // Table caption (new)
+  'caption': 'caption',
 };
 
 /**
@@ -178,6 +224,12 @@ function computeImplicitRole(
     return isTopLevelLandmark(element) ? 'contentinfo' : null;
   }
   
+  // Special case: th elements — scope="row" maps to rowheader
+  if (tagName === 'th') {
+    const scope = element.getAttribute('scope');
+    return scope === 'row' ? 'rowheader' : 'columnheader';
+  }
+
   // Special case: section only has region role if it has accessible name
   if (tagName === 'section') {
     // For now, we'll return 'region' - the caller should check if it has a name

@@ -113,7 +113,12 @@ function shouldAnnounceRoleFirst(role: AccessibleRole): boolean {
          role === 'complementary' ||
          role === 'region' ||
          role === 'form' ||
-         role === 'search';
+         role === 'search' ||
+         role === 'blockquote' ||
+         role === 'figure' ||
+         role === 'dialog' ||
+         role === 'group' ||
+         role === 'document';
 }
 
 /**
@@ -195,6 +200,63 @@ function formatRoleVoiceOver(node: AccessibleNode): string {
     case 'generic':
       // Generic containers are typically not announced
       return '';
+    
+    case 'staticText':
+    case 'paragraph':
+    case 'cell':
+    case 'term':
+    case 'definition':
+    case 'caption':
+      return '';
+    
+    case 'blockquote':
+      return 'blockquote';
+    
+    case 'code':
+      return 'code';
+    
+    case 'table': {
+      const rows = node.children.filter(c => c.role === 'row');
+      const rowCount = rows.length;
+      const colCount = rows.length > 0 ? rows[0].children.length : 0;
+      return `table, ${rowCount} rows, ${colCount} columns`;
+    }
+    
+    case 'row':
+      return 'row';
+    
+    case 'columnheader':
+      return 'column header';
+    
+    case 'rowheader':
+      return 'row header';
+    
+    case 'figure':
+      return 'figure';
+    
+    case 'dialog':
+      return 'web dialog';
+    
+    case 'meter':
+      return 'level indicator';
+    
+    case 'progressbar':
+      return 'progress indicator';
+    
+    case 'status':
+      return 'status';
+    
+    case 'group':
+      return node.name ? 'group' : '';
+    
+    case 'document':
+      return 'frame';
+    
+    case 'application':
+      return 'embedded object';
+    
+    case 'separator':
+      return 'separator';
     
     default:
       return role;

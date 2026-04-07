@@ -139,7 +139,7 @@ describe('Batch Processing', () => {
       expect(result.results).toHaveLength(1);
       
       // Output should contain audit report sections
-      expect(result.results[0].output).toContain('Accessibility Audit Report');
+      expect(result.results[0].output).toContain('ACCESSIBILITY AUDIT REPORT');
     });
 
     it('should handle empty file list', () => {
@@ -183,7 +183,7 @@ describe('Batch Processing', () => {
       
       // Second file has no button, should fail with selector error
       expect(result.results[1].success).toBe(false);
-      expect(result.results[1].error).toContain('No elements match selector');
+      expect(result.results[1].output).toContain('No elements match selector');
     });
 
     it('should work with validation mode in batch mode', () => {

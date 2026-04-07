@@ -298,6 +298,28 @@ A planned enhancement where the Analysis Tool, after generating screen reader ou
 
 This is scoped as a post-V1 feature and will be covered in a separate spec (likely tied to the core engine expansion workstream). The V1 audit report already surfaces issues — this enhancement would add the "how to fix it" layer on top.
 
+### Future: Renderer Coverage Expansion (post-V1)
+
+Dogfooding the AnnounceKit site through our own tool revealed a significant gap: the VoiceOver, NVDA, and JAWS renderers currently only output interactive elements (links, buttons, form controls) and landmarks (`<nav>`, `<main>`, `<footer>`). They do not render static content that screen readers announce when using the virtual cursor / browse mode — specifically:
+
+- Headings (`<h1>`–`<h6>`) — VoiceOver announces these as "heading level N, [text]"
+- Paragraph text (`<p>`) — read as plain text content
+- List items (`<li>`, `<ul>`, `<ol>`) — announced with "list, N items" context
+- Images (`<img>`) — announced with alt text
+- `<span>` and inline text nodes — read as part of the content flow
+- Table structures (`<table>`, `<th>`, `<td>`) — announced with row/column context
+- Definition lists (`<dl>`, `<dt>`, `<dd>`)
+- `<blockquote>`, `<code>`, `<pre>` — announced with semantic context
+
+This means the current tool output only reflects what a user hears when tabbing (focus mode), not what they hear when reading through the page (browse mode / VO+Right Arrow). For a complete screen reader prediction tool, both modes need to be represented.
+
+Findings from testing the AnnounceKit landing page:
+- The VoiceOver renderer output only 14 lines (nav links + footer links)
+- The actual page has ~40+ content elements (headings, paragraphs, list items, images) that VoiceOver would announce in browse mode
+- The `<section>` elements without `aria-label` were treated as generic containers and their children were not traversed for text content
+
+This expansion is a prerequisite for the remediation guidance feature above — you can't suggest fixes for content that the renderer doesn't even surface. It will be covered in a dedicated "core engine expansion" spec.
+
 ## Data Models
 
 ### Application State

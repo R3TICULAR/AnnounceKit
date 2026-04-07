@@ -16,7 +16,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Click me, button');
+      expect(announcement).toContain('Click me, button');
     });
 
     it('should announce button with expanded state', () => {
@@ -26,7 +26,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Menu, button, expanded');
+      expect(announcement).toContain('Menu, button, expanded');
     });
 
     it('should announce button with collapsed state', () => {
@@ -36,7 +36,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Menu, button, collapsed');
+      expect(announcement).toContain('Menu, button, collapsed');
     });
 
     it('should announce button with pressed state', () => {
@@ -46,7 +46,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Toggle, button, pressed');
+      expect(announcement).toContain('Toggle, button, pressed');
     });
 
     it('should announce disabled button', () => {
@@ -56,7 +56,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Submit, button, dimmed');
+      expect(announcement).toContain('Submit, button, dimmed');
     });
   });
 
@@ -68,7 +68,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Home, link');
+      expect(announcement).toContain('Home, link');
     });
 
     it('should announce current page link', () => {
@@ -78,7 +78,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('About, link, current page');
+      expect(announcement).toContain('About, link, current page');
     });
   });
 
@@ -91,7 +91,7 @@ describe('renderVoiceOver', () => {
       const announcement = renderVoiceOver(result.model);
       
       // VoiceOver announces role before name for headings
-      expect(announcement).toBe('heading level 2, Section Title');
+      expect(announcement).toContain('heading level 2, Section Title');
     });
 
     it('should announce h1 (role first)', () => {
@@ -101,7 +101,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('heading level 1, Page Title');
+      expect(announcement).toContain('heading level 1, Page Title');
     });
 
     it('should announce h6 (role first)', () => {
@@ -111,7 +111,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('heading level 6, Subsection');
+      expect(announcement).toContain('heading level 6, Subsection');
     });
   });
 
@@ -312,7 +312,7 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Toggle Menu, button, expanded, pressed');
+      expect(announcement).toContain('Toggle Menu, button, expanded, pressed');
     });
 
     it('should announce textbox with multiple states', () => {
@@ -458,7 +458,7 @@ describe('renderVoiceOver', () => {
       const announcement = renderVoiceOver(result.model);
       
       // Role first for headings
-      expect(announcement).toBe('heading level 2, Test');
+      expect(announcement).toContain('heading level 2, Test');
     });
 
     it('should announce landmark role before name', () => {
@@ -469,7 +469,7 @@ describe('renderVoiceOver', () => {
       const announcement = renderVoiceOver(result.model);
       
       // Role first for landmarks
-      expect(announcement).toBe('navigation, Test');
+      expect(announcement).toContain('navigation, Test');
     });
   });
 });

@@ -280,10 +280,10 @@ describe('computeRole', () => {
       expect(result.role).toBeNull();
     });
 
-    test('p has no implicit role', () => {
+    test('p has paragraph role', () => {
       const element = createElement('<p>Paragraph</p>');
       const result = computeRole(element);
-      expect(result.role).toBeNull();
+      expect(result.role).toBe('paragraph');
     });
   });
 
