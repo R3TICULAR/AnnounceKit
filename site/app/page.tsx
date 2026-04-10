@@ -151,9 +151,9 @@ export default function LandingPage() {
           <div className="lg:w-1/2 relative group">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
               <img
-                alt="Developer console showing CI/CD pipeline logs with successful accessibility checks"
+                alt="AnnounceKit CLI audit report showing colorized accessibility analysis with landmark structure, heading hierarchy, and issue severity indicators"
                 className="w-full aspect-video object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuChgfH6kk61X7asRCYBhkLTzdXDQwRG5VaswZ3rGlmgt-Eg5yZzsVXBrdooMe83M5Ct2ajty9P6BRn__0Cy1Ex628nW8pXsjtMKBo_bV5N_IzIUqvn65RNJ8Afy2koZ0Lg9EXigQfACldXmTjmIh4TZiDXBftbGCCIEmU-FD8hEX5ShH_uRLEpyG1y42X4x2QsrHg2U58neOVQFMKVVI-Zyibq1iIF4i-1GUU0bQIzvOg_fDDlOkV8G8U7hgBTKO4s8PkLoeQCXeIA"
+                src="/images/cli-audit-screenshot.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
             </div>

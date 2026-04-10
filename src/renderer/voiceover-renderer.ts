@@ -7,16 +7,19 @@
  */
 
 import type { AccessibleNode, AccessibleRole, AnnouncementModel } from '../model/types.js';
+import { createColors, type ColorFunctions } from '../cli/colors.js';
 
 /**
  * Renders an announcement model as VoiceOver-style announcement text.
  * 
  * @param model - Announcement model to render
+ * @param colorize - Whether to apply ANSI color codes to the output
  * @returns VoiceOver-style announcement text
  */
-export function renderVoiceOver(model: AnnouncementModel): string {
+export function renderVoiceOver(model: AnnouncementModel, colorize?: boolean): string {
+  const c = createColors(colorize ?? false);
   const announcements: string[] = [];
-  renderNodeVoiceOver(model.root, announcements);
+  renderNodeVoiceOver(model.root, announcements, c);
   return announcements.join('\n');
 }
 
@@ -25,16 +28,17 @@ export function renderVoiceOver(model: AnnouncementModel): string {
  * 
  * @param node - Node to render
  * @param announcements - Array to collect announcement strings
+ * @param c - Color functions for formatting
  */
-function renderNodeVoiceOver(node: AccessibleNode, announcements: string[]): void {
-  const announcement = formatNodeVoiceOver(node);
+function renderNodeVoiceOver(node: AccessibleNode, announcements: string[], c: ColorFunctions): void {
+  const announcement = formatNodeVoiceOver(node, c);
   if (announcement) {
     announcements.push(announcement);
   }
   
   // Recursively render children
   for (const child of node.children) {
-    renderNodeVoiceOver(child, announcements);
+    renderNodeVoiceOver(child, announcements, c);
   }
 }
 
@@ -42,9 +46,10 @@ function renderNodeVoiceOver(node: AccessibleNode, announcements: string[]): voi
  * Formats a single node as a VoiceOver announcement.
  * 
  * @param node - Node to format
+ * @param c - Color functions for formatting
  * @returns Formatted announcement string or empty string if node should not be announced
  */
-function formatNodeVoiceOver(node: AccessibleNode): string {
+function formatNodeVoiceOver(node: AccessibleNode, c: ColorFunctions): string {
   const parts: string[] = [];
   
   // VoiceOver often announces role before name for some elements
@@ -54,30 +59,30 @@ function formatNodeVoiceOver(node: AccessibleNode): string {
     // Add role first
     const roleText = formatRoleVoiceOver(node);
     if (roleText) {
-      parts.push(roleText);
+      parts.push(c.roleName(roleText));
     }
     
     // Then name
     if (node.name) {
-      parts.push(node.name);
+      parts.push(c.elementName(node.name));
     }
   } else {
     // Add name first
     if (node.name) {
-      parts.push(node.name);
+      parts.push(c.elementName(node.name));
     }
     
     // Then role
     const roleText = formatRoleVoiceOver(node);
     if (roleText) {
-      parts.push(roleText);
+      parts.push(c.roleName(roleText));
     }
   }
   
   // Add states
   const stateText = formatStatesVoiceOver(node);
   if (stateText) {
-    parts.push(stateText);
+    parts.push(c.stateName(stateText));
   }
   
   // Add value (for form controls)
@@ -90,7 +95,7 @@ function formatNodeVoiceOver(node: AccessibleNode): string {
   
   // Add description (if present)
   if (node.description) {
-    parts.push(node.description);
+    parts.push(c.description(node.description));
   }
   
   return parts.join(', ');

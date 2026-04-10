@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
+import { ClerkProvider } from '@clerk/nextjs';
 import { Navigation } from '../components/Navigation';
 import { RouteAnnouncer } from '../components/RouteAnnouncer';
 import { LiveRegionProvider } from '../components/LiveRegion';
@@ -15,6 +17,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Google Analytics */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+              `}
+            </Script>
+          </>
+        )}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
@@ -25,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden">
+        <ClerkProvider>
         <LiveRegionProvider>
           <AxeDevTools />
           {/* Skip link — first focusable element */}
@@ -69,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </footer>
         </LiveRegionProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

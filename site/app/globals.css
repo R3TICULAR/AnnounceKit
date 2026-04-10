@@ -16,3 +16,9 @@ body {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Programmatically focused elements (e.g. h1 after route change) should not show the ring */
+[tabindex="-1"]:focus-visible,
+[tabindex="-1"]:focus {
+  outline: none;
+}

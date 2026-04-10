@@ -10,6 +10,7 @@ import { renderJAWS } from '../renderer/jaws-renderer.js';
 import { renderVoiceOver } from '../renderer/voiceover-renderer.js';
 import { renderAuditReport } from '../renderer/audit-renderer.js';
 import { diffAccessibilityTrees, formatDiffAsJSON, formatDiffAsText } from '../diff/index.js';
+import { isColorEnabled, createColors } from './colors.js';
 import type { CLIOptions } from './options.js';
 import type { AnnouncementModel } from '../model/types.js';
 
@@ -70,10 +71,14 @@ export function processHTML(
 ): ProcessResult {
   const warnings: string[] = [];
   
+  // Determine whether to colorize output:
+  // Colors only when stdout is a TTY, format is not JSON, and output is not going to a file
+  const colorize = isColorEnabled(process.stdout) && options.format !== 'json' && !options.output;
+  
   try {
     // Handle diff mode
     if (options.diff && diffHTML) {
-      return processDiff(html, diffHTML, options, warnings);
+      return processDiff(html, diffHTML, options, warnings, colorize);
     }
     
     // Handle validation mode
@@ -82,7 +87,7 @@ export function processHTML(
     }
     
     // Normal processing mode
-    return processNormal(html, options, warnings);
+    return processNormal(html, options, warnings, colorize);
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -101,7 +106,8 @@ export function processHTML(
 function processNormal(
   html: string,
   options: CLIOptions,
-  warnings: string[]
+  warnings: string[],
+  colorize: boolean
 ): ProcessResult {
   // Parse HTML
   const doc = parseHTML(html);
@@ -146,7 +152,7 @@ function processNormal(
   }
   
   // Generate output based on format
-  const output = formatOutput(model, options);
+  const output = formatOutput(model, options, colorize);
   
   return {
     output,
@@ -162,7 +168,8 @@ function processDiff(
   html1: string,
   html2: string,
   options: CLIOptions,
-  warnings: string[]
+  warnings: string[],
+  colorize: boolean
 ): ProcessResult {
   // Parse both HTML files
   const doc1 = parseHTML(html1);
@@ -239,12 +246,12 @@ function processValidation(
 /**
  * Formats output based on format option.
  */
-function formatOutput(model: AnnouncementModel, options: CLIOptions): string {
+function formatOutput(model: AnnouncementModel, options: CLIOptions, colorize: boolean): string {
   const { format, screenReader } = options;
   
   // Handle audit format
   if (format === 'audit') {
-    return renderAuditReport(model);
+    return renderAuditReport(model, colorize);
   }
   
   // Handle JSON format
@@ -254,14 +261,15 @@ function formatOutput(model: AnnouncementModel, options: CLIOptions): string {
   
   // Handle text format
   if (format === 'text') {
-    return formatScreenReaderOutput(model, screenReader);
+    return formatScreenReaderOutput(model, screenReader, colorize);
   }
   
   // Handle both format
   if (format === 'both') {
     const json = serializeModel(model);
-    const text = formatScreenReaderOutput(model, screenReader);
-    return `=== JSON Output ===\n${json}\n\n=== Screen Reader Output ===\n${text}`;
+    const text = formatScreenReaderOutput(model, screenReader, colorize);
+    const c = createColors(colorize);
+    return `${c.sectionHeader('=== JSON Output ===')}\n${json}\n\n${c.sectionHeader('=== Screen Reader Output ===')}\n${text}`;
   }
   
   throw new Error(`Unknown format: ${format}`);
@@ -272,32 +280,34 @@ function formatOutput(model: AnnouncementModel, options: CLIOptions): string {
  */
 function formatScreenReaderOutput(
   model: AnnouncementModel,
-  screenReader: string
+  screenReader: string,
+  colorize: boolean
 ): string {
   if (screenReader === 'all') {
-    const nvda = renderNVDA(model);
-    const jaws = renderJAWS(model);
-    const voiceover = renderVoiceOver(model);
+    const nvda = renderNVDA(model, colorize);
+    const jaws = renderJAWS(model, colorize);
+    const voiceover = renderVoiceOver(model, colorize);
+    const c = createColors(colorize);
     
     return [
-      '=== NVDA ===',
+      c.sectionHeader('=== NVDA ==='),
       nvda,
       '',
-      '=== JAWS ===',
+      c.sectionHeader('=== JAWS ==='),
       jaws,
       '',
-      '=== VoiceOver ===',
+      c.sectionHeader('=== VoiceOver ==='),
       voiceover,
     ].join('\n');
   }
   
   switch (screenReader) {
     case 'nvda':
-      return renderNVDA(model);
+      return renderNVDA(model, colorize);
     case 'jaws':
-      return renderJAWS(model);
+      return renderJAWS(model, colorize);
     case 'voiceover':
-      return renderVoiceOver(model);
+      return renderVoiceOver(model, colorize);
     default:
       throw new Error(`Unknown screen reader: ${screenReader}`);
   }
@@ -306,15 +316,21 @@ function formatScreenReaderOutput(
 /**
  * Formats warnings for display.
  */
-export function formatWarnings(warnings: string[]): string {
+export function formatWarnings(warnings: string[], colorize?: boolean): string {
   if (warnings.length === 0) {
     return '';
   }
   
+  const c = createColors(colorize ?? false);
+  
+  const header = colorize
+    ? c.warning(c.bold('=== Warnings ==='))
+    : '=== Warnings ===';
+  
   const lines = [
     '',
-    '=== Warnings ===',
-    ...warnings.map(w => `⚠️  ${w}`),
+    header,
+    ...warnings.map(w => colorize ? `${c.warning('⚠️')}  ${w}` : `⚠️  ${w}`),
     '',
   ];
   

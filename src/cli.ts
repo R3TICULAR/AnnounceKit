@@ -17,6 +17,7 @@ import {
 } from './cli/options.js';
 import { readHTML, writeOutput, FileIOError } from './cli/io.js';
 import { processHTML, processBatch, formatWarnings } from './cli/orchestrator.js';
+import { isColorEnabled } from './cli/colors.js';
 
 // Get package.json for version
 const __filename = fileURLToPath(import.meta.url);
@@ -87,7 +88,7 @@ program
         
         // Display warnings to stderr
         if (result.warnings.length > 0) {
-          console.error(formatWarnings(result.warnings));
+          console.error(formatWarnings(result.warnings, isColorEnabled(process.stderr)));
         }
         
         // Exit with appropriate code
@@ -113,7 +114,7 @@ program
       
       // Display warnings to stderr
       if (result.warnings.length > 0) {
-        console.error(formatWarnings(result.warnings));
+        console.error(formatWarnings(result.warnings, isColorEnabled(process.stderr)));
       }
       
       // Exit with appropriate code

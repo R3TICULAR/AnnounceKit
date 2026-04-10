@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useUser, useAuth, useClerk } from '@clerk/nextjs';
 
 interface NavRoute {
   label: string;
@@ -27,6 +28,9 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const { isSignedIn, isLoaded } = useAuth();
+  const { user } = useUser();
+  const { signOut } = useClerk();
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
   useEffect(() => { if (mobileOpen) firstLinkRef.current?.focus(); }, [mobileOpen]);
@@ -77,12 +81,43 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link
-            href="/tool"
-            className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
-          >
-            Get Started
-          </Link>
+          {!isLoaded ? (
+            <div className="hidden md:flex items-center gap-3">
+              <div className="h-8 w-16 bg-slate-200 rounded animate-pulse" />
+              <div className="h-8 w-20 bg-slate-200 rounded animate-pulse" />
+            </div>
+          ) : isSignedIn ? (
+            <div className="hidden md:flex items-center gap-3">
+              <span className="text-sm text-slate-600">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
+              <button
+                onClick={() => signOut({ redirectUrl: '/' })}
+                className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                Sign Out
+              </button>
+              <Link
+                href="/tool"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
+              >
+                Analyzer
+              </Link>
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center gap-3">
+              <Link
+                href="/sign-in"
+                className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/sign-up"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
 
           {/* Mobile toggle */}
           <button

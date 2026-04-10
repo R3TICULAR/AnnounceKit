@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnnounceKit Demo — E-Commerce Checkout</title>
+</head>
+<body>
+  <!-- Banner -->
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/products">Products</a>
+      <a href="/cart">Cart (3 items)</a>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <h1>Checkout</h1>
+
+    <!-- Skipped heading level: h1 → h3 (will trigger hierarchy violation) -->
+    <section aria-label="Shipping details">
+      <h3>Shipping Address</h3>
+
+      <form aria-label="Shipping form">
+        <label for="full-name">Full Name</label>
+        <input id="full-name" type="text" required>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" required aria-invalid="true">
+
+        <label for="address">Street Address</label>
+        <input id="address" type="text" required>
+
+        <!-- Input missing a label (will trigger error) -->
+        <input type="text" placeholder="Apt / Suite">
+
+        <label for="city">City</label>
+        <input id="city" type="text">
+
+        <!-- Select -->
+        <label for="state">State</label>
+        <select id="state">
+          <option value="">Select state</option>
+          <option value="CA">California</option>
+          <option value="NY">New York</option>
+          <option value="TX">Texas</option>
+        </select>
+      </form>
+    </section>
+
+    <section aria-label="Payment">
+      <h3>Payment Method</h3>
+
+      <fieldset>
+        <legend>Choose payment type</legend>
+        <input id="pay-card" type="radio" name="payment" value="card" checked>
+        <label for="pay-card">Credit Card</label>
+
+        <input id="pay-paypal" type="radio" name="payment" value="paypal">
+        <label for="pay-paypal">PayPal</label>
+      </fieldset>
+
+      <label for="card-number">Card Number</label>
+      <input id="card-number" type="text" aria-describedby="card-hint">
+      <span id="card-hint">Enter your 16-digit card number</span>
+
+      <!-- Button without accessible name (will trigger error) -->
+      <button aria-label=""></button>
+
+      <button type="submit">Place Order — $149.97</button>
+    </section>
+
+    <!-- Unnamed navigation (will trigger warning) -->
+    <nav>
+      <a href="/back">Back to Cart</a>
+      <a href="/help">Need Help?</a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <nav aria-label="Footer links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/accessibility">Accessibility Statement</a>
+    </nav>
+    <p>&copy; 2026 DemoShop Inc.</p>
+  </footer>
+</body>
+</html>

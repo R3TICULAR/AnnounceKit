@@ -10,6 +10,7 @@
  */
 
 import type { AccessibleNode, AccessibleRole, AnnouncementModel } from '../model/types.js';
+import { createColors } from '../cli/colors.js';
 
 /**
  * Severity level for accessibility issues.
@@ -59,9 +60,9 @@ export interface AuditReport {
  * @param model - Announcement model to audit
  * @returns Formatted audit report text
  */
-export function renderAuditReport(model: AnnouncementModel): string {
+export function renderAuditReport(model: AnnouncementModel, colorize?: boolean): string {
   const report = generateAuditReport(model);
-  return formatAuditReport(report, model);
+  return formatAuditReport(report, model, colorize);
 }
 
 /**
@@ -322,27 +323,28 @@ function detectInteractiveIssues(elements: AccessibleNode[], issues: Accessibili
 /**
  * Formats audit report as human-readable text.
  */
-function formatAuditReport(report: AuditReport, model: AnnouncementModel): string {
+function formatAuditReport(report: AuditReport, model: AnnouncementModel, colorize?: boolean): string {
+  const c = createColors(colorize ?? false);
   const lines: string[] = [];
   
   // Header
-  lines.push('╔══════════════════════════════════════════════════════════════════════════════╗');
-  lines.push('║                      ACCESSIBILITY AUDIT REPORT                              ║');
-  lines.push('╚══════════════════════════════════════════════════════════════════════════════╝');
+  lines.push(c.title('╔══════════════════════════════════════════════════════════════════════════════╗'));
+  lines.push(c.title('║                      ACCESSIBILITY AUDIT REPORT                              ║'));
+  lines.push(c.title('╚══════════════════════════════════════════════════════════════════════════════╝'));
   lines.push('');
-  lines.push(`Analyzed: ${model.metadata.extractedAt}`);
+  lines.push(c.dim(`Analyzed: ${model.metadata.extractedAt}`));
   lines.push('');
   
   // Landmark structure
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  lines.push('📍 LANDMARK STRUCTURE');
+  lines.push(c.heading('📍 LANDMARK STRUCTURE'));
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   lines.push('');
   
   if (report.landmarks.length === 0) {
-    lines.push('✗ No landmarks found');
+    lines.push(c.error('✗ No landmarks found'));
   } else {
-    lines.push(`✓ ${report.landmarks.length} landmark(s) found`);
+    lines.push(c.success(`✓ ${report.landmarks.length} landmark(s) found`));
     lines.push('');
     report.landmarks.forEach(landmark => {
       const name = landmark.name ? `"${landmark.name}"` : '(unnamed)';
@@ -353,17 +355,17 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
   
   // Heading hierarchy
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  lines.push('📑 HEADING HIERARCHY');
+  lines.push(c.heading('📑 HEADING HIERARCHY'));
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   lines.push('');
   
   if (report.headings.length === 0) {
-    lines.push('ℹ No headings found');
+    lines.push(c.info('ℹ No headings found'));
   } else {
     const hasHierarchyIssues = report.issues.some(i => 
       i.message.includes('heading') || i.message.includes('h1') || i.message.includes('h2')
     );
-    lines.push(`${hasHierarchyIssues ? '✗' : '✓'} ${report.headings.length} heading(s) found ${hasHierarchyIssues ? '(HIERARCHY VIOLATION)' : '(proper hierarchy)'}`);
+    lines.push(`${hasHierarchyIssues ? c.error('✗') : c.success('✓')} ${report.headings.length} heading(s) found ${hasHierarchyIssues ? '(HIERARCHY VIOLATION)' : '(proper hierarchy)'}`);
     lines.push('');
     
     let prevLevel = 0;
@@ -378,14 +380,14 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
   
   // Interactive elements
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  lines.push('🎯 INTERACTIVE ELEMENTS');
+  lines.push(c.heading('🎯 INTERACTIVE ELEMENTS'));
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   lines.push('');
   
   if (report.interactiveElements.length === 0) {
-    lines.push('ℹ No interactive elements found');
+    lines.push(c.info('ℹ No interactive elements found'));
   } else {
-    lines.push(`✓ ${report.interactiveElements.length} interactive element(s) found`);
+    lines.push(c.success(`✓ ${report.interactiveElements.length} interactive element(s) found`));
     lines.push('');
     
     // Group by role
@@ -411,7 +413,7 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
   
   // Summary statistics
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  lines.push('📊 SUMMARY STATISTICS');
+  lines.push(c.heading('📊 SUMMARY STATISTICS'));
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   lines.push('');
   lines.push(`Total accessible elements: ${report.statistics.totalElements}`);
@@ -420,16 +422,16 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
   Object.entries(report.statistics.roleDistribution)
     .sort((a, b) => b[1] - a[1])
     .forEach(([role, count]) => {
-      lines.push(`  • ${role}: ${count}`);
+      lines.push(c.dim(`  • ${role}: ${count}`));
     });
   lines.push('');
-  lines.push(`Focusable elements: ${report.statistics.focusableCount}`);
+  lines.push(c.dim(`Focusable elements: ${report.statistics.focusableCount}`));
   lines.push('');
   
   // Issues
   if (report.issues.length > 0) {
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    lines.push('⚠️  ACCESSIBILITY ISSUES');
+    lines.push(c.heading('⚠️  ACCESSIBILITY ISSUES'));
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     lines.push('');
     
@@ -438,9 +440,9 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
     const infos = report.issues.filter(i => i.severity === 'info');
     
     if (errors.length > 0) {
-      lines.push(`✗ Error (${errors.length}):`);
+      lines.push(c.error(`✗ Error (${errors.length}):`));
       errors.forEach(issue => {
-        lines.push(`  • ${issue.message}`);
+        lines.push(c.error(`  • ${issue.message}`));
         if (issue.suggestion) {
           lines.push(`    → ${issue.suggestion}`);
         }
@@ -449,9 +451,9 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
     }
     
     if (warnings.length > 0) {
-      lines.push(`⚠ Warning (${warnings.length}):`);
+      lines.push(c.warning(`⚠ Warning (${warnings.length}):`));
       warnings.forEach(issue => {
-        lines.push(`  • ${issue.message}`);
+        lines.push(c.warning(`  • ${issue.message}`));
         if (issue.suggestion) {
           lines.push(`    → ${issue.suggestion}`);
         }
@@ -460,9 +462,9 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
     }
     
     if (infos.length > 0) {
-      lines.push(`ℹ Info (${infos.length}):`);
+      lines.push(c.info(`ℹ Info (${infos.length}):`));
       infos.forEach(issue => {
-        lines.push(`  • ${issue.message}`);
+        lines.push(c.info(`  • ${issue.message}`));
         if (issue.suggestion) {
           lines.push(`    → ${issue.suggestion}`);
         }
@@ -473,7 +475,7 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
   
   // Overall assessment
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  lines.push('✅ OVERALL ASSESSMENT');
+  lines.push(c.success('✅ OVERALL ASSESSMENT'));
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   lines.push('');
   
@@ -481,18 +483,18 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel): strin
   const warningCount = report.issues.filter(i => i.severity === 'warning').length;
   
   if (errorCount === 0 && warningCount === 0) {
-    lines.push('Excellent! No critical issues found.');
+    lines.push(c.success('Excellent! No critical issues found.'));
   } else if (errorCount > 0) {
     lines.push(`Critical accessibility issues found:`);
-    lines.push(`  ✗ ${errorCount} error(s)`);
+    lines.push(c.error(`  ✗ ${errorCount} error(s)`));
     if (warningCount > 0) {
-      lines.push(`  ⚠ ${warningCount} warning(s)`);
+      lines.push(c.warning(`  ⚠ ${warningCount} warning(s)`));
     }
     lines.push('');
     lines.push('Recommendation: Address errors before deployment');
   } else {
     lines.push(`Good structure with minor improvements needed:`);
-    lines.push(`  ⚠ ${warningCount} warning(s)`);
+    lines.push(c.warning(`  ⚠ ${warningCount} warning(s)`));
   }
   
   return lines.join('\n');

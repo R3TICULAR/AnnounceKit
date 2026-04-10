@@ -84,7 +84,7 @@ export function validateOptions(rawOptions: any): CLIOptions {
  * @returns Parsed input information
  */
 export function parseInput(input?: string | string[]): ParsedInput {
-  // Handle array input (batch mode)
+  // Handle array input (from Commander variadic argument)
   if (Array.isArray(input)) {
     if (input.length === 0) {
       return {
@@ -96,7 +96,18 @@ export function parseInput(input?: string | string[]): ParsedInput {
     
     // Check if any input is stdin
     if (input.includes('-')) {
+      if (input.length === 1) {
+        return { input: undefined, isStdin: true };
+      }
       throw new Error('Batch mode cannot be used with stdin input');
+    }
+    
+    // Single file — treat as normal single input
+    if (input.length === 1) {
+      return {
+        input: input[0],
+        isStdin: false,
+      };
     }
     
     return {

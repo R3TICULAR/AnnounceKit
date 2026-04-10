@@ -7,16 +7,19 @@
  */
 
 import type { AccessibleNode, AccessibleRole, AnnouncementModel } from '../model/types.js';
+import { createColors, type ColorFunctions } from '../cli/colors.js';
 
 /**
  * Renders an announcement model as NVDA-style announcement text.
  * 
  * @param model - Announcement model to render
+ * @param colorize - Whether to apply ANSI color codes to the output
  * @returns NVDA-style announcement text
  */
-export function renderNVDA(model: AnnouncementModel): string {
+export function renderNVDA(model: AnnouncementModel, colorize?: boolean): string {
+  const c = createColors(colorize ?? false);
   const announcements: string[] = [];
-  renderNodeNVDA(model.root, announcements);
+  renderNodeNVDA(model.root, announcements, c);
   return announcements.join('\n');
 }
 
@@ -25,16 +28,17 @@ export function renderNVDA(model: AnnouncementModel): string {
  * 
  * @param node - Node to render
  * @param announcements - Array to collect announcement strings
+ * @param c - Color functions for formatting
  */
-function renderNodeNVDA(node: AccessibleNode, announcements: string[]): void {
-  const announcement = formatNodeNVDA(node);
+function renderNodeNVDA(node: AccessibleNode, announcements: string[], c: ColorFunctions): void {
+  const announcement = formatNodeNVDA(node, c);
   if (announcement) {
     announcements.push(announcement);
   }
   
   // Recursively render children
   for (const child of node.children) {
-    renderNodeNVDA(child, announcements);
+    renderNodeNVDA(child, announcements, c);
   }
 }
 
@@ -42,26 +46,27 @@ function renderNodeNVDA(node: AccessibleNode, announcements: string[]): void {
  * Formats a single node as an NVDA announcement.
  * 
  * @param node - Node to format
+ * @param c - Color functions for formatting
  * @returns Formatted announcement string or empty string if node should not be announced
  */
-function formatNodeNVDA(node: AccessibleNode): string {
+function formatNodeNVDA(node: AccessibleNode, c: ColorFunctions): string {
   const parts: string[] = [];
   
   // Add name (if present)
   if (node.name) {
-    parts.push(node.name);
+    parts.push(c.elementName(node.name));
   }
   
   // Add role-specific formatting
   const roleText = formatRoleNVDA(node);
   if (roleText) {
-    parts.push(roleText);
+    parts.push(c.roleName(roleText));
   }
   
   // Add states
   const stateText = formatStatesNVDA(node);
   if (stateText) {
-    parts.push(stateText);
+    parts.push(c.stateName(stateText));
   }
   
   // Add value (for form controls)
@@ -74,7 +79,7 @@ function formatNodeNVDA(node: AccessibleNode): string {
   
   // Add description (if present)
   if (node.description) {
-    parts.push(node.description);
+    parts.push(c.description(node.description));
   }
   
   return parts.join(', ');
