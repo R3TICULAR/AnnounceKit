@@ -10,11 +10,14 @@ interface NavRoute {
   href: string;
 }
 
-const NAV_ROUTES: NavRoute[] = [
+const PUBLIC_NAV_ROUTES: NavRoute[] = [
   { label: 'Home', href: '/' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Docs', href: '/docs' },
   { label: 'Analyzer', href: '/tool' },
+];
+
+const AUTH_NAV_ROUTES: NavRoute[] = [
   { label: 'Settings', href: '/settings' },
 ];
 
@@ -31,6 +34,10 @@ export function Navigation() {
   const { isSignedIn, isLoaded } = useAuth();
   const { user } = useUser();
   const { signOut } = useClerk();
+
+  const navRoutes = isSignedIn
+    ? [...PUBLIC_NAV_ROUTES, ...AUTH_NAV_ROUTES]
+    : PUBLIC_NAV_ROUTES;
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
   useEffect(() => { if (mobileOpen) firstLinkRef.current?.focus(); }, [mobileOpen]);
@@ -62,7 +69,7 @@ export function Navigation() {
 
           {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
-            {NAV_ROUTES.map((route) => (
+            {navRoutes.map((route) => (
               <li key={route.href}>
                 <Link
                   href={route.href}
@@ -142,7 +149,7 @@ export function Navigation() {
       {/* Mobile menu */}
       {mobileOpen && (
         <ul className="border-t border-slate-200 px-6 pb-4 bg-white md:hidden">
-          {NAV_ROUTES.map((route, index) => (
+          {navRoutes.map((route, index) => (
             <li key={route.href}>
               <Link
                 ref={index === 0 ? firstLinkRef : undefined}

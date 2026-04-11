@@ -102,7 +102,7 @@ export default function PricingPage() {
         {TIERS.map((tier) => (
           <div key={tier.id}
             className={`flex flex-col p-8 bg-white rounded-xl transition-shadow ${
-              tier.recommended ? 'border-2 border-blue-600 shadow-xl relative md:scale-105 z-10' : 'border border-slate-200 hover:shadow-lg'
+              tier.recommended ? 'border-2 border-blue-600 shadow-xl relative md:scale-105 z-10' : 'border border-slate-200 hover:shadow-lg focus-within:z-20'
             }`}>
             {tier.recommended && (
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">

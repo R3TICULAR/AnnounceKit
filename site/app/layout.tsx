@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden">
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden flex flex-col">
         <ClerkProvider>
         <LiveRegionProvider>
           <AxeDevTools />
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navigation />
           <RouteAnnouncer />
 
-          <main id="main-content" className="pt-[73px]">
+          <main id="main-content" className="pt-[73px] flex-grow">
             {children}
           </main>
 

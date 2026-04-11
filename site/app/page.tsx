@@ -11,12 +11,13 @@ export default function LandingPage() {
               Version 1.0 Now Available
             </span>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
-              Know exactly what screen readers will say
+              Preview what screen readers will say — before your users hear it
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
-              AnnounceKit predicts how NVDA, JAWS, and VoiceOver will announce
-              your HTML — before your users hear it. Achieve 100% semantic
-              clarity with zero manual testing fatigue.
+              AnnounceKit simulates how NVDA, JAWS, and VoiceOver interpret
+              your HTML, helping you catch screen reader issues early in
+              development. Less manual testing overhead, fewer surprises
+              in production.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link
@@ -81,11 +82,12 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Precision-engineered for accessibility teams
+              Developer-first accessibility tooling
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Stop guessing how the browser interprets your ARIA labels. Get
-              visual feedback and technical reports in milliseconds.
+              Go beyond rule-based linting. See how assistive technologies
+              actually interpret your markup, and catch issues before they
+              reach users.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -118,13 +120,14 @@ export default function LandingPage() {
               Enterprise Grade
             </div>
             <h2 className="text-4xl font-bold mb-6">
-              Built for WCAG compliance at scale
+              Built to support accessibility workflows at scale
             </h2>
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              Scaling accessibility requires automation. AnnounceKit&apos;s CLI
-              integrates directly into your existing CI/CD workflows, providing
-              reliable screen reader simulations for millions of page states
-              across your entire application.
+              Screen reader usability issues are a leading cause of
+              accessibility complaints. AnnounceKit&apos;s CLI integrates
+              directly into your CI/CD workflows, helping teams identify
+              these issues earlier in development — across your entire
+              application.
             </p>
             <ul className="space-y-4 mb-10">
               {ENTERPRISE_POINTS.map((point) => (
@@ -138,13 +141,13 @@ export default function LandingPage() {
             </ul>
             <div className="flex gap-8">
               <div>
-                <div className="text-3xl font-bold">99.9%</div>
-                <div className="text-slate-400 text-sm">Prediction Accuracy</div>
+                <div className="text-3xl font-bold">High-Fidelity</div>
+                <div className="text-slate-400 text-sm">Spec-Aligned Simulation</div>
               </div>
               <div className="h-12 w-px bg-slate-800" aria-hidden="true" />
               <div>
-                <div className="text-3xl font-bold">50k+</div>
-                <div className="text-slate-400 text-sm">Audit Reports Daily</div>
+                <div className="text-3xl font-bold">3 Readers</div>
+                <div className="text-slate-400 text-sm">NVDA · JAWS · VoiceOver</div>
               </div>
             </div>
           </div>
@@ -153,7 +156,7 @@ export default function LandingPage() {
               <img
                 alt="AnnounceKit CLI audit report showing colorized accessibility analysis with landmark structure, heading hierarchy, and issue severity indicators"
                 className="w-full aspect-video object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                src="/images/cli-audit-screenshot.png"
+                src="/images/cli-colored-output.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
             </div>
@@ -165,11 +168,11 @@ export default function LandingPage() {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">
-            Ready to ship accessible code?
+            Ready to improve your accessibility workflow?
           </h2>
           <p className="text-xl text-slate-600 mb-12">
-            Join thousands of developers ensuring their web applications are
-            heard correctly by everyone.
+            Catch screen reader issues early, prevent regressions, and build
+            better experiences for assistive technology users.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
@@ -194,32 +197,32 @@ export default function LandingPage() {
 const FEATURES = [
   {
     icon: 'devices',
-    title: 'Cross-Platform Prediction',
+    title: 'Cross-Platform Simulation',
     description:
-      'Test against NVDA, JAWS, and VoiceOver from a single tool. Eliminate the need for multiple virtual machines or hardware devices.',
+      'Simulate NVDA, JAWS, and VoiceOver output from a single tool. Reduce reliance on multiple operating systems and hardware devices for screen reader testing.',
   },
   {
     icon: 'assignment_turned_in',
-    title: 'WCAG Audit Reports',
+    title: 'Accessibility Audit Reports',
     description:
-      'Get detailed accessibility audits with actionable findings. Every report includes clear remediation steps for common WCAG violations.',
+      'Generate detailed audit reports aligned with WCAG guidance. Each report surfaces landmark issues, heading hierarchy problems, and missing accessible names with actionable remediation steps.',
   },
   {
     icon: 'difference',
     title: 'Semantic Diff',
     description:
-      'Compare before and after HTML to catch accessibility regressions instantly. Visualize how your DOM changes impact screen reader output.',
+      'Compare before and after HTML to catch accessibility regressions early. See how DOM changes affect screen reader output before merging.',
   },
   {
     icon: 'terminal',
     title: 'CI/CD Integration',
     description:
-      'Run automated accessibility checks in your build pipeline. Our CLI tool ensures no inaccessible code ever reaches your production branch.',
+      'Run automated screen reader simulation checks in your build pipeline. Help catch accessibility issues before they reach production.',
   },
 ];
 
 const ENTERPRISE_POINTS = [
-  'Zero-latency local prediction engine',
-  'SSO and RBAC for team security',
-  'SOC2 Type II compliant infrastructure',
+  'Zero-latency local simulation engine',
+  'Batch processing across entire codebases',
+  'Regression detection via semantic diffing',
 ];

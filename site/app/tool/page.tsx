@@ -77,8 +77,9 @@ export default function AnalyzerPage() {
   const panelContent = getPanelContent(activeTab, result, screenReader);
 
   return (
-    <div className="pb-12 px-6 max-w-7xl mx-auto w-full">
-      <header className="mb-10 pt-4">
+    <div className="pb-12 px-6">
+      <div className="max-w-7xl mx-auto">
+      <header className="mb-10 pt-12">
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">Accessibility Analyzer</h1>
         <p className="text-lg text-gray-600">Paste or upload HTML to see how screen readers will announce it.</p>
       </header>
@@ -127,13 +128,13 @@ export default function AnalyzerPage() {
               <div className="flex flex-wrap items-center gap-4">
                 <input ref={fileInputRef} type="file" accept=".html,.htm" className="hidden" onChange={handleFileUpload} />
                 <button type="button" onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                  className="order-1 inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                   <span className="material-symbols-outlined text-[20px]" aria-hidden="true">upload</span>
                   Upload .html file
                 </button>
-                <div className="flex flex-col">
+                <div className="order-2 flex flex-col">
                   <label htmlFor="sr-select" className="sr-only">Screen reader</label>
-                  <select id="sr-select" className="text-sm border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 py-2 pl-3 pr-10"
+                  <select id="sr-select" className="text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 pl-3 pr-10"
                     value={screenReader} onChange={(e) => setScreenReader(e.target.value as ScreenReaderOption)}>
                     <option value="NVDA">NVDA</option>
                     <option value="JAWS">JAWS</option>
@@ -141,12 +142,12 @@ export default function AnalyzerPage() {
                     <option value="All">All</option>
                   </select>
                 </div>
-                <div className="flex-grow">
+                <div className="order-3 flex-grow">
                   <label htmlFor="css-selector" className="sr-only">CSS selector</label>
-                  <input id="css-selector" type="text" className="w-full text-sm border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 py-2 px-3"
+                  <input id="css-selector" type="text" className="w-full text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 px-3"
                     placeholder="e.g. button, .my-class" value={cssSelector} onChange={(e) => setCssSelector(e.target.value)} />
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="order-4 flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-600" id="diff-label">Diff mode</span>
                   <button type="button" role="switch" aria-checked={diffMode} aria-labelledby="diff-label"
                     onClick={() => setDiffMode(!diffMode)}
@@ -219,15 +220,19 @@ export default function AnalyzerPage() {
             <div className="flex justify-between items-center px-4 py-2 bg-white border-b border-gray-100">
               <span className="text-xs font-mono text-gray-500">{activeTab}</span>
               <div className="flex gap-2">
-                <button type="button" onClick={() => navigator.clipboard.writeText(panelContent)}
-                  className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all"
-                  aria-label="Copy to clipboard" disabled={!result}>
-                  <span className="material-symbols-outlined text-[18px]" aria-hidden="true">content_copy</span>
+                <button type="button"
+                  className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                  style={{ opacity: result ? 1 : 0.4, cursor: result ? 'pointer' : 'not-allowed' }}
+                  aria-label="Copy to clipboard" aria-disabled={!result}
+                  onClick={() => { if (result) navigator.clipboard.writeText(panelContent); }}>
+                  <span className="material-symbols-outlined text-[18px] leading-none block" aria-hidden="true">content_copy</span>
                 </button>
-                <button type="button" onClick={() => downloadText(panelContent, `${activeTab}.txt`)}
-                  className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all"
-                  aria-label="Download output" disabled={!result}>
-                  <span className="material-symbols-outlined text-[18px]" aria-hidden="true">download</span>
+                <button type="button"
+                  className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                  style={{ opacity: result ? 1 : 0.4, cursor: result ? 'pointer' : 'not-allowed' }}
+                  aria-label="Download output" aria-disabled={!result}
+                  onClick={() => { if (result) downloadText(panelContent, `${activeTab}.txt`); }}>
+                  <span className="material-symbols-outlined text-[18px] leading-none block" aria-hidden="true">download</span>
                 </button>
               </div>
             </div>
@@ -250,6 +255,7 @@ export default function AnalyzerPage() {
             </div>
           </div>
         </section>
+      </div>
       </div>
     </div>
   );

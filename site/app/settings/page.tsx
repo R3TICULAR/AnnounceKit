@@ -12,7 +12,7 @@ export default function SettingsPage() {
 
   if (!isLoaded) {
     return (
-      <div className="max-w-3xl mx-auto pt-4 pb-12 px-6">
+      <div className="max-w-3xl mx-auto pt-12 pb-12 px-6">
         <div className="animate-pulse space-y-6">
           <div className="h-8 w-48 bg-slate-200 rounded" />
           <div className="h-48 bg-slate-100 rounded-xl" />
@@ -41,7 +41,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto pt-4 pb-12 px-6">
+    <div className="max-w-3xl mx-auto pt-12 pb-12 px-6">
       <div className="mb-10">
         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Settings</h1>
         <p className="text-slate-600 mt-2">Manage your account and subscription.</p>
