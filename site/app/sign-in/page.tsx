@@ -57,7 +57,7 @@ export default function SignInPage() {
               style={{ fontVariationSettings: "'FILL' 1" }}>record_voice_over</span>
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Welcome back</h1>
-          <p className="text-slate-500 mt-2">Sign in to your AnnounceKit account.</p>
+          <p className="text-slate-500 mt-2">Sign in to your Speakable account.</p>
         </div>
         <div className="bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-200 p-8">
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>

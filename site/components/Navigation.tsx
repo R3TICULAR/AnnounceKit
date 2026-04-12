@@ -64,7 +64,7 @@ export function Navigation() {
             href="/"
             className="text-xl font-bold tracking-tight text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded"
           >
-            AnnounceKit
+            Speakable
           </Link>
 
           {/* Desktop links */}

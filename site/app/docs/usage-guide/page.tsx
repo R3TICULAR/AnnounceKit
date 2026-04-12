@@ -9,14 +9,14 @@ export default function UsageGuidePage() {
         </nav>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Usage Guide</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Learn how to use AnnounceKit to analyze your HTML and predict screen reader output.
+          Learn how to use Speakable to analyze your HTML and predict screen reader output.
         </p>
       </header>
 
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Quick Start</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Install AnnounceKit globally via npm, then run it against any HTML file:
+          Install Speakable globally via npm, then run it against any HTML file:
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -24,8 +24,8 @@ export default function UsageGuidePage() {
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed text-slate-300">
-{`npm install -g announcekit
-announcekit analyze ./my-page.html --engine nvda`}
+{`npm install -g speakable
+speakable analyze ./my-page.html --engine nvda`}
             </pre>
           </div>
         </div>
@@ -57,7 +57,7 @@ announcekit analyze ./my-page.html --engine nvda`}
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Diff Mode</h2>
         <p className="text-slate-600 leading-relaxed">
-          Toggle diff mode to compare two HTML snippets side by side. AnnounceKit will show
+          Toggle diff mode to compare two HTML snippets side by side. Speakable will show
           you exactly which accessibility tree nodes were added, removed, or changed between
           the two versions.
         </p>

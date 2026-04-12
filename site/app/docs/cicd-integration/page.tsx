@@ -9,21 +9,21 @@ export default function CiCdIntegrationPage() {
         </nav>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">CI/CD Integration</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Run AnnounceKit in your build pipeline to catch accessibility regressions on every pull request.
+          Run Speakable in your build pipeline to catch accessibility regressions on every pull request.
         </p>
       </header>
 
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Installation</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Install AnnounceKit as a dev dependency in your project:
+          Install Speakable as a dev dependency in your project:
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
             <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Terminal</span>
           </div>
           <div className="p-6 overflow-x-auto">
-            <pre className="text-sm font-mono leading-relaxed text-slate-300">npm install --save-dev announcekit</pre>
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">npm install --save-dev speakable</pre>
           </div>
         </div>
       </section>
@@ -39,11 +39,11 @@ export default function CiCdIntegrationPage() {
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed text-slate-300">
-{`- name: Run AnnounceKit
-  run: npx announcekit analyze ./dist/index.html --engine all --format json
+{`- name: Run Speakable
+  run: npx speakable analyze ./dist/index.html --engine all --format json
   
 - name: Check for regressions
-  run: npx announcekit diff ./baseline.json ./current.json --fail-on-change`}
+  run: npx speakable diff ./baseline.json ./current.json --fail-on-change`}
             </pre>
           </div>
         </div>
@@ -60,8 +60,8 @@ export default function CiCdIntegrationPage() {
 {`accessibility:
   stage: test
   script:
-    - npx announcekit analyze ./dist/index.html --engine all --format json
-    - npx announcekit diff ./baseline.json ./current.json --fail-on-change`}
+    - npx speakable analyze ./dist/index.html --engine all --format json
+    - npx speakable diff ./baseline.json ./current.json --fail-on-change`}
             </pre>
           </div>
         </div>

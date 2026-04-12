@@ -14,7 +14,7 @@ export default function LandingPage() {
               Preview what screen readers will say — before your users hear it
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
-              AnnounceKit simulates how NVDA, JAWS, and VoiceOver interpret
+              Speakable simulates how NVDA, JAWS, and VoiceOver interpret
               your HTML, helping you catch screen reader issues early in
               development. Less manual testing overhead, fewer surprises
               in production.
@@ -45,7 +45,7 @@ export default function LandingPage() {
                 <div className="w-3 h-3 rounded-full bg-green-500" aria-hidden="true" />
                 <div className="ml-4 text-xs font-mono text-slate-400">analyzer.tsx</div>
               </div>
-              <div className="space-y-4 py-4 px-2" role="img" aria-label="Code example showing AnnounceKit predicting NVDA will announce a button as Submit Payment, button">
+              <div className="space-y-4 py-4 px-2" role="img" aria-label="Code example showing Speakable predicting NVDA will announce a button as Submit Payment, button">
                 <div className="flex gap-4">
                   <span className="text-slate-500 font-mono text-xs">1</span>
                   <code className="text-blue-400 font-mono text-xs">
@@ -124,7 +124,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
               Screen reader usability issues are a leading cause of
-              accessibility complaints. AnnounceKit&apos;s CLI integrates
+              accessibility complaints. Speakable&apos;s CLI integrates
               directly into your CI/CD workflows, helping teams identify
               these issues earlier in development — across your entire
               application.
@@ -154,7 +154,7 @@ export default function LandingPage() {
           <div className="lg:w-1/2 relative group">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
               <img
-                alt="AnnounceKit CLI audit report showing colorized accessibility analysis with landmark structure, heading hierarchy, and issue severity indicators"
+                alt="Speakable CLI audit report showing colorized accessibility analysis with landmark structure, heading hierarchy, and issue severity indicators"
                 className="w-full aspect-video object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                 src="/images/cli-colored-output.png"
               />

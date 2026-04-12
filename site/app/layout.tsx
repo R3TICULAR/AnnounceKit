@@ -9,7 +9,7 @@ import { AxeDevTools } from '../components/AxeDevTools';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'AnnounceKit | Accessibility-First Screen Reader Prediction',
+  title: 'Speakable | Accessibility-First Screen Reader Prediction',
   description: 'Predict screen reader output across NVDA, JAWS, and VoiceOver',
 };
 
@@ -66,9 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <footer className="bg-slate-50 border-t border-slate-200 w-full py-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 max-w-7xl mx-auto">
               <div>
-                <div className="text-lg font-bold text-slate-900 mb-4">AnnounceKit</div>
+                <div className="text-lg font-bold text-slate-900 mb-4">Speakable</div>
                 <p className="text-sm text-slate-500 max-w-xs">
-                  © {new Date().getFullYear()} AnnounceKit. Accessibility-first
+                  © {new Date().getFullYear()} Speakable. Accessibility-first
                   analysis for modern teams. Built for inclusive web design.
                 </p>
               </div>

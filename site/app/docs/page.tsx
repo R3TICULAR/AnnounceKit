@@ -13,7 +13,7 @@ export default function ApiReferencePage() {
           API Reference
         </h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          The AnnounceKit API allows developers to programmatically analyze web
+          The Speakable API allows developers to programmatically analyze web
           interfaces and predict screen reader announcements. Use our modular CLI
           and library to integrate accessibility testing directly into your
           development workflow.
@@ -31,7 +31,7 @@ export default function ApiReferencePage() {
           <h2 className="text-2xl font-bold text-slate-900">Parser</h2>
         </div>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          The Parser module is the entry point of the AnnounceKit pipeline. It
+          The Parser module is the entry point of the Speakable pipeline. It
           ingests raw HTML, DOM trees, or URL endpoints and constructs a semantic
           accessibility tree optimized for screen reader simulation. It handles
           complex ARIA relationships and shadow DOM boundaries automatically.
@@ -43,7 +43,7 @@ export default function ApiReferencePage() {
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed">
               <code>
-                <span className="text-blue-400">announcekit</span>{' '}
+                <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">analyze</span>{' '}
                 {'./index.html --engine '}
                 <span className="text-orange-300">nvda</span>

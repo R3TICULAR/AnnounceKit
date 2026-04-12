@@ -137,8 +137,8 @@ export default function SettingsPage() {
               <p className="text-sm text-slate-600">Our support team is always ready to assist you.</p>
             </div>
           </div>
-          <a className="text-blue-600 font-medium hover:underline" href="mailto:support@announcekit.dev">
-            support@announcekit.dev
+          <a className="text-blue-600 font-medium hover:underline" href="mailto:support@speakable.dev">
+            support@speakable.dev
           </a>
         </div>
       </div>
