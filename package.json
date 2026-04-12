@@ -1,9 +1,11 @@
 {
-  "name": "speakable",
+  "name": "@reticular/speakable",
   "version": "1.0.0",
   "description": "CLI tool for analyzing HTML accessibility announcements",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "bin": {
     "speakable": "dist/cli.js"
   },
