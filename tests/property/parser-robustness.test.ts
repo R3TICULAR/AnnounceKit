@@ -1,7 +1,7 @@
 /**
  * Property-based tests for parser robustness.
  * 
- * Feature: announcekit-cli
+ * Feature: speakable-cli
  * Property 1: Parser Robustness
  * Validates: Requirements 1.1, 1.3
  */

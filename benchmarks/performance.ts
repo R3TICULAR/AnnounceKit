@@ -1,5 +1,5 @@
 /**
- * Performance benchmarks for AnnounceKit.
+ * Performance benchmarks for Speakable.
  * Target: <5 seconds for typical component HTML.
  * Alert threshold: >20% regression from baseline.
  */
@@ -103,7 +103,7 @@ function benchmark(
 // --- Run benchmarks ---
 
 function runAll(): void {
-  console.log('AnnounceKit Performance Benchmarks');
+  console.log('Speakable Performance Benchmarks');
   console.log('===================================\n');
 
   const results: BenchmarkResult[] = [];

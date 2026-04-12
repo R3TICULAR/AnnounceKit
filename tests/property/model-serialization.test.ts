@@ -1,7 +1,7 @@
 /**
  * Property-based tests for model serialization.
  * 
- * Feature: announcekit-cli
+ * Feature: speakable-cli
  * Property 5: Model Serialization Round Trip
  * Validates: Requirements 3.2, 11.1, 11.4
  */

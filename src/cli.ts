@@ -1,5 +1,5 @@
 /**
- * AnnounceKit CLI entry point.
+ * Speakable CLI entry point.
  * 
  * Command-line interface for analyzing HTML accessibility announcements.
  */
@@ -29,7 +29,7 @@ const packageJson = JSON.parse(
 const program = new Command();
 
 program
-  .name('announcekit')
+  .name('speakable')
   .description('Analyze HTML accessibility announcements and generate screen reader output')
   .version(packageJson.version, '-v, --version', 'Output the current version')
   .helpOption('-h, --help', 'Display help for command');
@@ -138,15 +138,15 @@ program
 program.addHelpText('after', `
 
 Examples:
-  $ announcekit input.html
-  $ announcekit input.html -f text -s nvda
-  $ announcekit input.html -f both -s all
-  $ announcekit input.html --selector "button"
-  $ announcekit input.html --diff old.html
-  $ announcekit --batch file1.html file2.html file3.html
-  $ cat input.html | announcekit -
-  $ announcekit input.html -o output.json
-  $ announcekit input.html -f audit
+  $ speakable input.html
+  $ speakable input.html -f text -s nvda
+  $ speakable input.html -f both -s all
+  $ speakable input.html --selector "button"
+  $ speakable input.html --diff old.html
+  $ speakable --batch file1.html file2.html file3.html
+  $ cat input.html | speakable -
+  $ speakable input.html -o output.json
+  $ speakable input.html -f audit
 
 Screen Readers:
   nvda       - NVDA (Windows)

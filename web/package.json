@@ -1,7 +1,7 @@
 {
-  "name": "announcekit-web",
+  "name": "speakable-web",
   "version": "1.0.0",
-  "description": "Browser-based interface for AnnounceKit accessibility analysis",
+  "description": "Browser-based interface for Speakable accessibility analysis",
   "type": "module",
   "scripts": {
     "dev": "vite",

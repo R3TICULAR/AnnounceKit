@@ -161,7 +161,7 @@ export class AkApp extends LitElement {
     return html`
       <div class="app">
         <header>
-          <h1>AnnounceKit Web</h1>
+          <h1>Speakable Web</h1>
           <p class="subtitle">Analyse how screen readers will announce your HTML.</p>
         </header>
 

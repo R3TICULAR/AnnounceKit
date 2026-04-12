@@ -1,7 +1,7 @@
 /**
  * Property-based tests for the analyzer service.
  *
- * Feature: announcekit-web
+ * Feature: speakable-web
  * Properties covered: 1, 2, 5, 7, 10, 12
  */
 

@@ -1,11 +1,11 @@
 {
-  "name": "announcekit",
+  "name": "speakable",
   "version": "1.0.0",
   "description": "CLI tool for analyzing HTML accessibility announcements",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "announcekit": "dist/cli.js"
+    "speakable": "dist/cli.js"
   },
   "scripts": {
     "build": "tsup",

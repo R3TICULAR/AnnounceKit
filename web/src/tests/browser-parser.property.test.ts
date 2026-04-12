@@ -1,7 +1,7 @@
 /**
  * Property-based tests for the browser parser adapter.
  *
- * Feature: announcekit-web, Property 13: Browser parser returns valid ParseResult for any HTML string
+ * Feature: speakable-web, Property 13: Browser parser returns valid ParseResult for any HTML string
  * Validates: Requirements 7.3
  */
 

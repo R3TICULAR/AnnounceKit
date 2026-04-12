@@ -1,7 +1,7 @@
 /**
  * Property-based tests for deterministic output.
  * 
- * Feature: announcekit-cli
+ * Feature: speakable-cli
  * Property 6: Deterministic Output
  * Validates: Requirements 3.3, 3.5
  */

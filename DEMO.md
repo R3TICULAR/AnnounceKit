@@ -1,8 +1,8 @@
-# AnnounceKit Demo - Web Component Analysis
+# Speakable Demo - Web Component Analysis
 
 ## 🎯 Your Tool is Ready!
 
-AnnounceKit can now analyze any web component markup and show you how it will be announced by screen readers!
+Speakable can now analyze any web component markup and show you how it will be announced by screen readers!
 
 ## Quick Start
 
@@ -98,12 +98,12 @@ node dist/cli.js sample-component.html --validate
 
 ## Programmatic API
 
-You can also use AnnounceKit programmatically in your own tools:
+You can also use Speakable programmatically in your own tools:
 
 ```typescript
-import { buildAccessibilityTree } from 'announcekit';
-import { renderNVDA, renderJAWS, renderVoiceOver } from 'announcekit';
-import { renderAuditReport } from 'announcekit';
+import { buildAccessibilityTree } from 'speakable';
+import { renderNVDA, renderJAWS, renderVoiceOver } from 'speakable';
+import { renderAuditReport } from 'speakable';
 
 // Parse your component HTML
 const tree = buildAccessibilityTree(element);
@@ -183,13 +183,13 @@ import {
   AnnouncementModel,
   AccessibleNode,
   // ... and more
-} from 'announcekit';
+} from 'speakable';
 ```
 
 ### For Web Component Testing
 
 1. Extract your component's HTML
-2. Pass it to AnnounceKit
+2. Pass it to Speakable
 3. Get instant feedback on accessibility
 4. Compare with expected output
 5. Catch regressions in CI

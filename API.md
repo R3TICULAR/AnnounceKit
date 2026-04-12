@@ -1,17 +1,17 @@
-# AnnounceKit API Documentation
+# Speakable API Documentation
 
-This document describes the programmatic API for using AnnounceKit as a library in your Node.js applications.
+This document describes the programmatic API for using Speakable as a library in your Node.js applications.
 
 ## Installation
 
 ```bash
-npm install announcekit
+npm install speakable
 ```
 
 ## Quick Start
 
 ```typescript
-import { parseHTML, buildAccessibilityTree, serializeModel } from 'announcekit';
+import { parseHTML, buildAccessibilityTree, serializeModel } from 'speakable';
 
 const html = '<button>Click me</button>';
 const doc = parseHTML(html);
@@ -28,7 +28,7 @@ console.log(json);
 Parse HTML into a DOM representation.
 
 ```typescript
-import { parseHTML } from 'announcekit/parser';
+import { parseHTML } from 'speakable/parser';
 ```
 
 #### `parseHTML(html: string): ParseResult`
@@ -62,7 +62,7 @@ import {
   computeAccessibleName,
   computeAccessibleDescription,
   computeRole
-} from 'announcekit/extractor';
+} from 'speakable/extractor';
 ```
 
 #### `buildAccessibilityTree(element: Element): TreeResult`
@@ -189,7 +189,7 @@ import {
   serializeModel,
   deserializeModel,
   validateModel
-} from 'announcekit/model';
+} from 'speakable/model';
 ```
 
 #### `serializeModel(model: AnnouncementModel): string`
@@ -260,7 +260,7 @@ import {
   renderJAWS,
   renderVoiceOver,
   renderAudit
-} from 'announcekit/renderer';
+} from 'speakable/renderer';
 ```
 
 #### `renderNVDA(model: AnnouncementModel): string`
@@ -337,7 +337,7 @@ console.log(report);
 Compare accessibility models.
 
 ```typescript
-import { computeDiff, formatDiff } from 'announcekit/diff';
+import { computeDiff, formatDiff } from 'speakable/diff';
 ```
 
 #### `computeDiff(oldModel: AnnouncementModel, newModel: AnnouncementModel): SemanticDiff`
@@ -541,7 +541,7 @@ import {
   renderVoiceOver,
   renderAudit,
   computeDiff
-} from 'announcekit';
+} from 'speakable';
 
 // Parse HTML
 const html = `
@@ -631,7 +631,7 @@ if (result.warnings.length > 0) {
 Validate models before serialization:
 
 ```typescript
-import { validateModel } from 'announcekit/model';
+import { validateModel } from 'speakable/model';
 
 const validation = validateModel(model);
 if (!validation.valid) {
@@ -666,7 +666,7 @@ const links = buildAccessibilityTreeWithSelector(doc.document.body, 'a');
 
 ## TypeScript Support
 
-AnnounceKit is written in TypeScript and includes full type definitions. Enable strict mode for best results:
+Speakable is written in TypeScript and includes full type definitions. Enable strict mode for best results:
 
 ```json
 {

@@ -1,4 +1,4 @@
-# AnnounceKit
+# Speakable
 
 CLI tool for analyzing HTML accessibility announcements.
 

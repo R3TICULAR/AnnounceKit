@@ -240,16 +240,16 @@ Once implemented, developers will be able to use:
 
 ```bash
 # Generate audit report
-announcekit component.html --format audit
+speakable component.html --format audit
 
 # Compare with JSON output
-announcekit component.html --format json,audit
+speakable component.html --format json,audit
 
 # Audit specific component
-announcekit page.html --selector ".my-component" --format audit
+speakable page.html --selector ".my-component" --format audit
 
 # Save audit to file
-announcekit component.html --format audit --output audit-report.txt
+speakable component.html --format audit --output audit-report.txt
 ```
 
 ## Benefits

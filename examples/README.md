@@ -1,6 +1,6 @@
-# AnnounceKit Examples
+# Speakable Examples
 
-This directory contains example HTML files demonstrating various accessibility patterns and their expected AnnounceKit output.
+This directory contains example HTML files demonstrating various accessibility patterns and their expected Speakable output.
 
 ## Example Files
 
@@ -18,16 +18,16 @@ Demonstrates various button patterns:
 **Try it:**
 ```bash
 # Analyze all buttons
-announcekit examples/button.html
+speakable examples/button.html
 
 # Analyze specific button
-announcekit examples/button.html --selector 'button:first-of-type'
+speakable examples/button.html --selector 'button:first-of-type'
 
 # Get NVDA announcements
-announcekit examples/button.html --format text --screen-reader nvda
+speakable examples/button.html --format text --screen-reader nvda
 
 # Get audit report
-announcekit examples/button.html --format audit
+speakable examples/button.html --format audit
 ```
 
 ### form.html
@@ -45,13 +45,13 @@ Demonstrates form input patterns:
 **Try it:**
 ```bash
 # Analyze entire form
-announcekit examples/form.html
+speakable examples/form.html
 
 # Analyze only text inputs
-announcekit examples/form.html --selector 'input[type="text"], input[type="email"]'
+speakable examples/form.html --selector 'input[type="text"], input[type="email"]'
 
 # Get VoiceOver announcements
-announcekit examples/form.html --format text --screen-reader voiceover
+speakable examples/form.html --format text --screen-reader voiceover
 ```
 
 ### navigation.html
@@ -67,10 +67,10 @@ Demonstrates landmark and navigation patterns:
 **Try it:**
 ```bash
 # Analyze landmarks
-announcekit examples/navigation.html --selector 'nav, main, aside, footer'
+speakable examples/navigation.html --selector 'nav, main, aside, footer'
 
 # Get audit report showing landmark structure
-announcekit examples/navigation.html --format audit
+speakable examples/navigation.html --format audit
 ```
 
 ### headings.html
@@ -83,10 +83,10 @@ Demonstrates heading hierarchy patterns:
 **Try it:**
 ```bash
 # Analyze heading structure
-announcekit examples/headings.html --selector 'h1, h2, h3, h4, h5, h6, [role="heading"]'
+speakable examples/headings.html --selector 'h1, h2, h3, h4, h5, h6, [role="heading"]'
 
 # Get audit report showing heading hierarchy
-announcekit examples/headings.html --format audit
+speakable examples/headings.html --format audit
 ```
 
 ### lists.html
@@ -100,13 +100,13 @@ Demonstrates list patterns:
 **Try it:**
 ```bash
 # Analyze all lists
-announcekit examples/lists.html
+speakable examples/lists.html
 
 # Analyze only unordered lists
-announcekit examples/lists.html --selector 'ul'
+speakable examples/lists.html --selector 'ul'
 
 # Get JAWS announcements
-announcekit examples/lists.html --format text --screen-reader jaws
+speakable examples/lists.html --format text --screen-reader jaws
 ```
 
 ## Expected Output Files
@@ -119,7 +119,7 @@ Files ending in `-expected.json` contain the expected output for specific comman
 Example:
 ```bash
 # Generate output
-announcekit examples/button.html --selector 'button:first-of-type' > output.json
+speakable examples/button.html --selector 'button:first-of-type' > output.json
 
 # Compare with expected
 diff output.json examples/button-expected.json
@@ -133,16 +133,16 @@ Use CSS selectors to focus on specific elements:
 
 ```bash
 # All buttons
-announcekit page.html --selector 'button'
+speakable page.html --selector 'button'
 
 # Buttons with specific class
-announcekit page.html --selector 'button.primary'
+speakable page.html --selector 'button.primary'
 
 # Elements with aria-label
-announcekit page.html --selector '[aria-label]'
+speakable page.html --selector '[aria-label]'
 
 # Interactive elements
-announcekit page.html --selector 'button, a, input, select, textarea'
+speakable page.html --selector 'button, a, input, select, textarea'
 ```
 
 ### Comparing Versions
@@ -151,7 +151,7 @@ Use semantic diff to see what changed:
 
 ```bash
 # Compare old and new versions
-announcekit new-button.html --diff old-button.html
+speakable new-button.html --diff old-button.html
 ```
 
 ### Batch Processing
@@ -160,10 +160,10 @@ Process multiple examples at once:
 
 ```bash
 # Analyze all examples
-announcekit examples/*.html
+speakable examples/*.html
 
 # Get audit reports for all
-announcekit examples/*.html --format audit
+speakable examples/*.html --format audit
 ```
 
 ### Output Formats
@@ -172,16 +172,16 @@ Try different output formats:
 
 ```bash
 # JSON (default) - for CI and programmatic use
-announcekit examples/button.html
+speakable examples/button.html
 
 # Text - for human-readable announcements
-announcekit examples/button.html --format text
+speakable examples/button.html --format text
 
 # Audit - for comprehensive analysis
-announcekit examples/button.html --format audit
+speakable examples/button.html --format audit
 
 # Both - JSON + text
-announcekit examples/button.html --format both
+speakable examples/button.html --format both
 ```
 
 ### Screen Reader Comparison
@@ -190,12 +190,12 @@ Compare how different screen readers announce the same content:
 
 ```bash
 # All screen readers
-announcekit examples/button.html --format text --screen-reader all
+speakable examples/button.html --format text --screen-reader all
 
 # Specific screen reader
-announcekit examples/button.html --format text --screen-reader nvda
-announcekit examples/button.html --format text --screen-reader jaws
-announcekit examples/button.html --format text --screen-reader voiceover
+speakable examples/button.html --format text --screen-reader nvda
+speakable examples/button.html --format text --screen-reader jaws
+speakable examples/button.html --format text --screen-reader voiceover
 ```
 
 ## Creating Your Own Examples
@@ -227,7 +227,7 @@ Example template:
 Then test:
 
 ```bash
-announcekit your-example.html --format audit
+speakable your-example.html --format audit
 ```
 
 ## Tips
