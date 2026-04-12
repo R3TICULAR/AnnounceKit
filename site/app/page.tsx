@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { DiffPreview } from '../components/DiffPreview';
+import { CrossPlatformPreview } from '../components/CrossPlatformPreview';
 
 export default function LandingPage() {
   return (
@@ -109,6 +111,82 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Workflow Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">
+              How Speakable fits into your workflow
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+              Bridge the gap between code and accessibility by embedding screen reader
+              simulation directly into your existing development lifecycle.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 z-0" aria-hidden="true" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+              {WORKFLOW_STEPS.map((step) => (
+                <div
+                  key={step.title}
+                  className="group flex flex-col items-center lg:items-start bg-white p-8 rounded-2xl shadow-sm border border-slate-100 transition-all hover:shadow-xl hover:border-teal-100 hover:-translate-y-1"
+                >
+                  <div className="w-14 h-14 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6 group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors">
+                    <span className="material-symbols-outlined text-3xl" aria-hidden="true">
+                      {step.icon}
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <span className="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-2 py-1 rounded">
+                      {step.stage}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed text-center lg:text-left">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <DiffPreview />
+            </div>
+            <div className="bg-teal-600 rounded-3xl p-8 flex flex-col justify-between text-white">
+              <div>
+                <span className="material-symbols-outlined text-4xl mb-4" aria-hidden="true">bolt</span>
+                <h4 className="text-2xl font-bold mb-4">Speed up Reviews</h4>
+                <p className="text-teal-50 opacity-90 leading-relaxed">
+                  Instead of manual inspection, let Speakable generate a semantic diff.
+                  See how the screen reader experience changes between versions.
+                </p>
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/docs"
+                  className="bg-white text-teal-700 px-6 py-3 rounded-xl font-bold w-full block text-center hover:bg-teal-50 transition-colors"
+                >
+                  Read the Docs
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16 max-w-3xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
+            <div className="w-12 h-12 shrink-0 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+              <span className="material-symbols-outlined" aria-hidden="true">info</span>
+            </div>
+            <p className="text-slate-600 text-sm italic text-center md:text-left">
+              Speakable complements manual screen reader testing — it doesn&apos;t replace it.
+              Use it to catch issues early and reduce the manual testing burden.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Enterprise Section */}
       <section className="py-24 px-6 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
@@ -160,6 +238,144 @@ export default function LandingPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Teams Section */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-12">
+              {TEAM_FEATURES.map((feature) => (
+                <div key={feature.title} className="flex gap-6 group">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center border border-blue-100 group-hover:bg-blue-600 group-hover:text-white text-blue-600 transition-all">
+                    <span className="material-symbols-outlined text-3xl" aria-hidden="true">
+                      {feature.icon}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
+                    <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="relative lg:h-full flex items-center justify-center">
+              <div className="absolute inset-0 bg-blue-50 rounded-3xl -rotate-2" aria-hidden="true" />
+              <div className="relative bg-white p-1 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+                <div className="bg-slate-900 px-4 py-2 flex items-center gap-2 border-b border-slate-800">
+                  <div className="flex gap-1.5" aria-hidden="true">
+                    <div className="w-3 h-3 rounded-full bg-rose-500" />
+                    <div className="w-3 h-3 rounded-full bg-amber-500" />
+                    <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                  </div>
+                  <div className="ml-4 text-[10px] text-slate-500 font-mono tracking-tight uppercase">
+                    Team Dashboard — Production Environment
+                  </div>
+                </div>
+                <div className="p-6 bg-slate-950">
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                      <div className="text-slate-500 text-[10px] font-bold uppercase mb-1">Pass Rate</div>
+                      <div className="text-2xl font-bold text-emerald-400">98.2%</div>
+                    </div>
+                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                      <div className="text-slate-500 text-[10px] font-bold uppercase mb-1">Total Assets</div>
+                      <div className="text-2xl font-bold text-white">4,281</div>
+                    </div>
+                  </div>
+                  <div className="space-y-3" aria-hidden="true">
+                    <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-600 w-3/4" />
+                    </div>
+                    <div className="h-2 w-2/3 bg-slate-900 rounded-full overflow-hidden">
+                      <div className="h-full bg-teal-500 w-1/2" />
+                    </div>
+                    <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-600 w-5/6" />
+                    </div>
+                  </div>
+                  <div className="mt-8 pt-6 border-t border-slate-800 flex justify-between items-center">
+                    <div className="flex -space-x-2" aria-hidden="true">
+                      <div className="w-8 h-8 rounded-full border-2 border-slate-950 bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">JD</div>
+                      <div className="w-8 h-8 rounded-full border-2 border-slate-950 bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">AS</div>
+                      <div className="w-8 h-8 rounded-full border-2 border-slate-950 bg-emerald-600 flex items-center justify-center text-[10px] font-bold text-white">+8</div>
+                    </div>
+                    <div className="text-slate-400 text-xs font-medium">12 active developers</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-24 text-center">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-6">
+              Built for teams, not just individuals
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
+              Establish shared accessibility standards and ensure consistent validation
+              across your entire engineering organization.
+            </p>
+            <div className="inline-flex items-center gap-2 text-teal-700 font-bold hover:gap-3 transition-all">
+              <Link href="/docs" className="flex items-center gap-2">
+                Read the Docs
+                <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why It Matters Section */}
+      <section className="py-24 px-6 bg-slate-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative overflow-hidden bg-teal-50/50 border border-teal-200/30 rounded-3xl p-8 md:p-16 text-center shadow-sm">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-teal-100/30 rounded-full blur-3xl" aria-hidden="true" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl" aria-hidden="true" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 text-teal-600 mb-8">
+                <span className="material-symbols-outlined text-3xl" aria-hidden="true" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-6">
+                Why screen reader issues matter
+              </h2>
+              <div className="max-w-2xl mx-auto space-y-6">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+                  Screen reader usability issues are among the most common sources of
+                  accessibility failures on the web. These issues often go undetected
+                  until late in development — or until users report them.
+                </p>
+                <p className="text-base md:text-lg text-slate-600 leading-relaxed opacity-90">
+                  Manual screen reader testing is time-consuming and difficult to scale
+                  across large applications. <span className="text-blue-600 font-semibold">Speakable</span> helps
+                  teams identify these issues earlier in the development cycle, before
+                  they reach production.
+                </p>
+              </div>
+              <div className="mt-12 pt-8 border-t border-teal-200/40 max-w-lg mx-auto">
+                <p className="text-sm font-medium text-teal-700 flex items-center justify-center gap-2">
+                  <span className="material-symbols-outlined text-lg" aria-hidden="true">gavel</span>
+                  With growing accessibility expectations under laws like the ADA, early
+                  detection isn&apos;t just good practice — it&apos;s risk mitigation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white rounded-2xl p-8 flex flex-col justify-center border border-slate-200">
+            <span className="text-teal-600 font-bold text-xs uppercase tracking-widest mb-4">The Challenge</span>
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">Manual testing is a bottleneck.</h3>
+            <p className="text-slate-600">
+              Standard accessibility tools catch syntax, but miss user experience.
+              Automated simulation bridges the gap between raw code and real human interaction.
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden">
+            <CrossPlatformPreview />
           </div>
         </div>
       </section>
@@ -218,6 +434,64 @@ const FEATURES = [
     title: 'CI/CD Integration',
     description:
       'Run automated screen reader simulation checks in your build pipeline. Help catch accessibility issues before they reach production.',
+  },
+];
+
+const TEAM_FEATURES = [
+  {
+    icon: 'groups',
+    title: 'Shared standards',
+    description:
+      'Everyone validates against the same simulation. No more "it works on my machine" accessibility discrepancies across different developer environments.',
+  },
+  {
+    icon: 'fact_check',
+    title: 'Consistent validation',
+    description:
+      'Identical checks run locally in the CLI, during PR reviews, and within your CI/CD pipelines for end-to-end reliability.',
+  },
+  {
+    icon: 'shield',
+    title: 'Reduced regressions',
+    description:
+      'Catch screen reader issues before they compound in large codebases. Maintain accessibility health as your engineering org scales.',
+  },
+  {
+    icon: 'account_tree',
+    title: 'Workflow integration',
+    description:
+      'Native support for PR reviews and automated build pipelines with centralized team dashboards for organization-wide visibility.',
+  },
+];
+
+const WORKFLOW_STEPS = [
+  {
+    icon: 'terminal',
+    stage: 'Stage 01',
+    title: 'Local Development',
+    description:
+      'Run Speakable against your HTML locally to preview screen reader output before committing. Catch issues at the source.',
+  },
+  {
+    icon: 'rebase',
+    stage: 'Stage 02',
+    title: 'Pull Requests',
+    description:
+      'Regression detection via semantic diff. Catch accessibility changes in code review before they merge.',
+  },
+  {
+    icon: 'deployed_code',
+    stage: 'Stage 03',
+    title: 'CI/CD Pipelines',
+    description:
+      'Automated checks running Speakable in build pipelines, failing builds on regressions to maintain quality.',
+  },
+  {
+    icon: 'monitoring',
+    stage: 'Stage 04',
+    title: 'Ongoing Monitoring',
+    description:
+      'Prevent regressions over time. Maintain accessibility standards across every production release.',
   },
 ];
 
