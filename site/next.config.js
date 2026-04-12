@@ -25,6 +25,9 @@ const nextConfig = {
     }
     config.resolve.extensionAlias['.js'] = ['.ts', '.js'];
 
+    // Resolve picocolors from site/node_modules when imported by parent src/ files
+    config.resolve.alias['picocolors'] = resolve(__dirname, 'node_modules/picocolors');
+
     return config;
   },
 };
