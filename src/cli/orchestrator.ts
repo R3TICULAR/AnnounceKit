@@ -114,7 +114,7 @@ function processNormal(
   
   // Collect warnings from parser
   if (doc.warnings.length > 0) {
-    warnings.push(...doc.warnings);
+    warnings.push(...doc.warnings.map(w => w.message));
   }
   
   // Build accessibility tree
@@ -138,7 +138,7 @@ function processNormal(
     // Collect warnings
     for (const result of results) {
       if (result.warnings.length > 0) {
-        warnings.push(...result.warnings);
+        warnings.push(...result.warnings.map(w => w.message));
       }
     }
   } else {
@@ -147,7 +147,7 @@ function processNormal(
     model = result.model;
     
     if (result.warnings.length > 0) {
-      warnings.push(...result.warnings);
+      warnings.push(...result.warnings.map(w => w.message));
     }
   }
   
@@ -169,20 +169,20 @@ function processDiff(
   html2: string,
   options: CLIOptions,
   warnings: string[],
-  colorize: boolean
+  _colorize: boolean
 ): ProcessResult {
   // Parse both HTML files
   const doc1 = parseHTML(html1);
   const doc2 = parseHTML(html2);
   
   // Collect warnings
-  warnings.push(...doc1.warnings, ...doc2.warnings);
+  warnings.push(...doc1.warnings.map(w => w.message), ...doc2.warnings.map(w => w.message));
   
   // Build accessibility trees
   const result1 = buildAccessibilityTree(doc1.document.body);
   const result2 = buildAccessibilityTree(doc2.document.body);
   
-  warnings.push(...result1.warnings, ...result2.warnings);
+  warnings.push(...result1.warnings.map(w => w.message), ...result2.warnings.map(w => w.message));
   
   // Compute diff
   const diff = diffAccessibilityTrees(result1.model.root, result2.model.root);
@@ -207,15 +207,15 @@ function processDiff(
  */
 function processValidation(
   html: string,
-  options: CLIOptions,
+  _options: CLIOptions,
   warnings: string[]
 ): ProcessResult {
   // Parse and extract
   const doc = parseHTML(html);
-  warnings.push(...doc.warnings);
+  warnings.push(...doc.warnings.map(w => w.message));
   
   const result = buildAccessibilityTree(doc.document.body);
-  warnings.push(...result.warnings);
+  warnings.push(...result.warnings.map(w => w.message));
   
   const model = result.model;
   
@@ -403,7 +403,7 @@ export function processBatch(
 /**
  * Formats batch processing results.
  */
-function formatBatchOutput(results: BatchResult[], options: CLIOptions): string {
+function formatBatchOutput(results: BatchResult[], _options: CLIOptions): string {
   const lines: string[] = [];
   
   // Add header

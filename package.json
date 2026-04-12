@@ -24,6 +24,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/jsdom": "^28.0.1",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^1.0.0",
     "fast-check": "^3.15.0",

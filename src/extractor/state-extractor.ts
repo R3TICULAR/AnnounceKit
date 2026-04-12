@@ -359,7 +359,7 @@ function extractNumberAttribute(
 function extractNativeStates(
   element: Element,
   state: AccessibleState,
-  warnings: StateExtractionWarning[]
+  _warnings: StateExtractionWarning[]
 ): void {
   const tagName = element.tagName.toLowerCase();
 

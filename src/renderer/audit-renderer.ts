@@ -368,12 +368,10 @@ function formatAuditReport(report: AuditReport, model: AnnouncementModel, colori
     lines.push(`${hasHierarchyIssues ? c.error('✗') : c.success('✓')} ${report.headings.length} heading(s) found ${hasHierarchyIssues ? '(HIERARCHY VIOLATION)' : '(proper hierarchy)'}`);
     lines.push('');
     
-    let prevLevel = 0;
     report.headings.forEach(heading => {
       const level = heading.state.level || 1;
       const indent = '  '.repeat(level - 1);
       lines.push(`${indent}h${level} "${heading.name}"`);
-      prevLevel = level;
     });
   }
   lines.push('');

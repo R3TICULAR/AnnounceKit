@@ -6,7 +6,7 @@
  * settings, verbosity level, and context. Use for development guidance only.
  */
 
-import type { AccessibleNode, AccessibleRole, AnnouncementModel } from '../model/types.js';
+import type { AccessibleNode, AnnouncementModel } from '../model/types.js';
 import { createColors, type ColorFunctions } from '../cli/colors.js';
 
 /**

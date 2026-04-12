@@ -201,7 +201,7 @@ function validateAndNormalizeRole(
  */
 function computeImplicitRole(
   element: Element,
-  warnings: RoleComputationWarning[]
+  _warnings: RoleComputationWarning[]
 ): AccessibleRole | null {
   const tagName = element.tagName.toLowerCase();
   

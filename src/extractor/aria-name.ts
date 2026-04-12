@@ -196,7 +196,7 @@ function computeNameFromLabel(element: Element): string {
  * @param visited - Set of visited elements
  * @returns Text content or empty string
  */
-function computeNameFromContent(element: Element, visited: Set<Element>): string {
+function computeNameFromContent(element: Element, _visited: Set<Element>): string {
   return getTextContent(element);
 }
 
