@@ -247,8 +247,8 @@ export default function AnalyzerPage() {
               </pre>
             </div>
 
-            <div className="p-4 bg-blue-50 border-t border-blue-100">
-              <div className="flex gap-2 items-center text-xs text-blue-700">
+            <div className="p-4 bg-teal-50 border-t border-teal-100">
+              <div className="flex gap-2 items-center text-xs text-teal-700">
                 <span className="material-symbols-outlined text-[16px]" aria-hidden="true">lightbulb</span>
                 <span>Tip: Use CSS selectors to focus analysis on specific elements.</span>
               </div>

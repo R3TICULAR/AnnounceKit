@@ -106,7 +106,7 @@ export default function ApiReferencePage() {
       </section>
 
       {/* CTA */}
-      <div className="mt-20 p-8 rounded-2xl bg-blue-600 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="mt-20 p-8 rounded-2xl bg-teal-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h4 className="text-xl font-bold mb-2">Need more help?</h4>
           <p className="text-white">
@@ -115,7 +115,7 @@ export default function ApiReferencePage() {
         </div>
         <Link
           href="#"
-          className="bg-white text-blue-600 px-6 py-2 rounded-lg font-bold hover:bg-blue-50 transition-colors whitespace-nowrap"
+          className="bg-white text-teal-700 px-6 py-2 rounded-lg font-bold hover:bg-teal-50 transition-colors whitespace-nowrap"
         >
           Join Discord
         </Link>

@@ -7,7 +7,7 @@ export default function LandingPage() {
       <section className="pt-12 pb-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 text-center md:text-left">
-            <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 mb-6">
+            <span className="inline-flex items-center rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 mb-6">
               Version 1.0 Now Available
             </span>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
@@ -96,7 +96,7 @@ export default function LandingPage() {
                 key={f.title}
                 className="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition-shadow group"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-2xl" aria-hidden="true">
                     {f.icon}
                   </span>
@@ -113,7 +113,7 @@ export default function LandingPage() {
       <section className="py-24 px-6 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-bold mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal-500/20 text-teal-400 rounded-full text-xs font-bold mb-6">
               <span className="material-symbols-outlined text-xs" aria-hidden="true">
                 verified
               </span>
@@ -132,7 +132,7 @@ export default function LandingPage() {
             <ul className="space-y-4 mb-10">
               {ENTERPRISE_POINTS.map((point) => (
                 <li key={point} className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-blue-500" aria-hidden="true">
+                  <span className="material-symbols-outlined text-teal-500" aria-hidden="true">
                     check_circle
                   </span>
                   <span>{point}</span>
@@ -183,7 +183,7 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/docs"
-              className="px-10 py-5 bg-slate-900 hover:bg-slate-800 text-white text-lg font-bold rounded transition-all active:scale-95 text-center"
+              className="px-10 py-5 bg-teal-700 hover:bg-teal-800 text-white text-lg font-bold rounded transition-all active:scale-95 text-center"
             >
               Read the Docs
             </Link>

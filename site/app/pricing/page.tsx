@@ -119,7 +119,7 @@ export default function PricingPage() {
             <ul className="space-y-4 mb-8 flex-grow">
               {tier.features.map((f) => (
                 <li key={f.text} className="flex items-start gap-3">
-                  <span className={`material-symbols-outlined text-blue-600 text-lg ${f.bold ? 'font-bold' : ''}`} aria-hidden="true">check_circle</span>
+                  <span className={`material-symbols-outlined text-teal-600 text-lg ${f.bold ? 'font-bold' : ''}`} aria-hidden="true">check_circle</span>
                   <span className={`text-sm ${f.bold ? 'text-slate-900 font-semibold' : 'text-slate-600'}`}>{f.text}</span>
                 </li>
               ))}
@@ -139,8 +139,8 @@ export default function PricingPage() {
       </div>
 
       <div className="max-w-4xl mx-auto mt-16 text-center px-6">
-        <div className="inline-flex items-center gap-2 bg-blue-50 px-6 py-4 rounded-xl border border-blue-100">
-          <span className="material-symbols-outlined text-blue-600" aria-hidden="true">info</span>
+        <div className="inline-flex items-center gap-2 bg-teal-50 px-6 py-4 rounded-xl border border-teal-100">
+          <span className="material-symbols-outlined text-teal-600" aria-hidden="true">info</span>
           <p className="text-sm text-slate-700 leading-relaxed text-left">
             All screen readers are available on every tier — we never gate accessibility features behind a paywall.
           </p>
