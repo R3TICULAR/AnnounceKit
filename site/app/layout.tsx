@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
@@ -73,16 +74,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </p>
               </div>
               <div className="flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-center">
-                <Link href="#" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
+                <Link href="/privacy" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
                   Privacy Policy
                 </Link>
-                <Link href="#" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
+                <Link href="/terms" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
                   Terms of Service
                 </Link>
-                <Link href="#" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
+                <Link href="/security" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
                   Security
                 </Link>
-                <Link href="#" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
+                <Link href="/contact" className="text-sm text-slate-500 hover:text-blue-600 transition-colors underline decoration-blue-600 decoration-2 underline-offset-4">
                   Contact
                 </Link>
               </div>
