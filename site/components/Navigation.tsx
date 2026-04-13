@@ -29,6 +29,7 @@ function isActive(pathname: string, href: string): boolean {
 export function Navigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openedViaKeyboard, setOpenedViaKeyboard] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const { isSignedIn, isLoaded } = useAuth();
@@ -40,7 +41,12 @@ export function Navigation() {
     : PUBLIC_NAV_ROUTES;
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
-  useEffect(() => { if (mobileOpen) firstLinkRef.current?.focus(); }, [mobileOpen]);
+  useEffect(() => {
+    if (mobileOpen && openedViaKeyboard) {
+      firstLinkRef.current?.focus();
+      setOpenedViaKeyboard(false);
+    }
+  }, [mobileOpen, openedViaKeyboard]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -113,7 +119,7 @@ export function Navigation() {
             <div className="hidden md:flex items-center gap-3">
               <Link
                 href="/sign-in"
-                className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded transition-colors"
               >
                 Log In
               </Link>
@@ -133,6 +139,11 @@ export function Navigation() {
             aria-label="Menu"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((prev) => !prev)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setOpenedViaKeyboard(true);
+              }
+            }}
             className="inline-flex items-center justify-center rounded p-2 text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 md:hidden"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -148,7 +159,7 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <ul className="border-t border-slate-200 px-6 pb-4 bg-white md:hidden">
+        <ul className="border-t border-slate-200 px-6 pb-4 bg-white md:hidden animate-[slideDown_200ms_ease-out]">
           {navRoutes.map((route, index) => (
             <li key={route.href}>
               <Link
@@ -165,6 +176,32 @@ export function Navigation() {
               </Link>
             </li>
           ))}
+          {!isLoaded ? null : isSignedIn ? (
+            <li className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
+              <span className="text-sm text-slate-600 px-2">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
+              <button
+                onClick={() => signOut({ redirectUrl: '/' })}
+                className="block w-full text-left rounded px-2 py-2 text-sm font-medium text-slate-600 hover:text-blue-600"
+              >
+                Sign Out
+              </button>
+            </li>
+          ) : (
+            <li className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
+              <Link
+                href="/sign-in"
+                className="block text-center rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/sign-up"
+                className="block text-center rounded px-4 py-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+              >
+                Sign Up
+              </Link>
+            </li>
+          )}
         </ul>
       )}
     </nav>

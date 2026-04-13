@@ -15,6 +15,8 @@ const CORE_MODULES = [
   { label: 'Parser', href: '/docs#parser' },
   { label: 'Extractor', href: '/docs#extractor' },
   { label: 'Renderers', href: '/docs#renderers' },
+  { label: 'Model', href: '/docs#model' },
+  { label: 'Diff', href: '/docs#diff' },
 ];
 
 function isActive(pathname: string, href: string): boolean {
