@@ -176,6 +176,32 @@ export function Navigation() {
               </Link>
             </li>
           ))}
+          {!isLoaded ? null : isSignedIn ? (
+            <li className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
+              <span className="text-sm text-slate-600 px-2">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
+              <button
+                onClick={() => signOut({ redirectUrl: '/' })}
+                className="block w-full text-left rounded px-2 py-2 text-sm font-medium text-slate-600 hover:text-blue-600"
+              >
+                Sign Out
+              </button>
+            </li>
+          ) : (
+            <li className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
+              <Link
+                href="/sign-in"
+                className="block text-center rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/sign-up"
+                className="block text-center rounded px-4 py-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+              >
+                Sign Up
+              </Link>
+            </li>
+          )}
         </ul>
       )}
     </nav>
