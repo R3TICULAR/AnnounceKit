@@ -2,6 +2,8 @@
 
 Simulate how NVDA, JAWS, and VoiceOver interpret your HTML — from a single CLI tool. Catch screen reader issues early, detect regressions in CI/CD, and reduce manual testing overhead.
 
+**Try it in your browser — no install needed:** [getspeakable.dev/tool](https://getspeakable.dev/tool)
+
 Speakable bridges the gap between rule-based linting tools (like axe) and manual screen reader testing. It gives you scalable, automated insight into how assistive technologies will interpret your UI.
 
 > Screen reader output is heuristic and may differ from actual behavior. Speakable complements manual testing — it doesn't replace it.
@@ -36,6 +38,12 @@ speakable new.html --diff old.html
 # Pipe from stdin
 cat page.html | speakable -
 ```
+
+> For quick one-off checks, you can also paste HTML directly into the [web analyzer](https://getspeakable.dev/tool) — same engine, no setup.
+
+## Web Analyzer
+
+If you want to test HTML quickly without installing anything, paste it directly into the web analyzer at [getspeakable.dev/tool](https://getspeakable.dev/tool). It runs the same simulation engine in the browser — supports NVDA, JAWS, and VoiceOver output, CSS selector filtering, and diff mode. Useful for quick iteration, debugging a specific component, or sharing results with teammates who don't have the CLI installed.
 
 ## CLI Reference
 
@@ -245,6 +253,7 @@ Use Speakable to catch issues early and reduce the manual testing burden — the
 4. **Check all readers** — Use `-s all` to see cross-platform differences
 5. **Start with audit** — Use `-f audit` for a quick overview of accessibility health
 6. **Save baselines** — Store JSON output as baselines for regression detection
+7. **Use the web tool for debugging** — Paste HTML into [getspeakable.dev/tool](https://getspeakable.dev/tool) when you need fast visual feedback during development
 
 ## Requirements
 

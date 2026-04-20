@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { DiffPreview } from '../components/DiffPreview';
 import { CrossPlatformPreview } from '../components/CrossPlatformPreview';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 export default function LandingPage() {
   return (
     <>
       {/* Hero Section */}
+      <ScrollReveal>
       <section className="pt-12 pb-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 text-center md:text-left">
@@ -78,8 +80,10 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Features Grid */}
+      <ScrollReveal>
       <section className="py-24 bg-slate-50 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -110,8 +114,10 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Workflow Section */}
+      <ScrollReveal>
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -186,8 +192,10 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Enterprise Section */}
+      <ScrollReveal>
       <section className="py-24 px-6 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2">
@@ -241,8 +249,10 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Teams Section */}
+      <ScrollReveal>
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -327,6 +337,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Why It Matters Section */}
       <section className="py-24 px-6 bg-slate-50">
