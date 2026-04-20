@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { ScrollReveal } from '../../components/ScrollReveal';
 
 const TIERS = [
   {
@@ -90,6 +91,7 @@ export default function PricingPage() {
   };
 
   return (
+    <ScrollReveal>
     <div className="flex-grow pb-24">
       <section className="max-w-4xl mx-auto text-center pt-12 mb-16 px-6">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">Pricing</h1>
@@ -147,5 +149,6 @@ export default function PricingPage() {
         </div>
       </div>
     </div>
+    </ScrollReveal>
   );
 }
