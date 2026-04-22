@@ -8,6 +8,8 @@ const DOCS_SECTIONS = [
   { label: 'API Reference', href: '/docs' },
   { label: 'Usage Guide', href: '/docs/usage-guide' },
   { label: 'Examples', href: '/docs/examples' },
+  { label: 'Framework Guides', href: '/docs/frameworks' },
+  { label: 'Spec Integration', href: '/docs/spec-integration' },
   { label: 'CI/CD Integration', href: '/docs/cicd-integration' },
 ];
 
