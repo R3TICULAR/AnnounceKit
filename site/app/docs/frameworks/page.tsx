@@ -9,7 +9,7 @@ export default function FrameworkGuidesPage() {
         </nav>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Framework Guides</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Integrate Speakable into your React, Angular, or Web Component workflow.
+          Integrate Speakable into your React, Angular, Svelte, or Web Component workflow.
           Each guide shows how to extract rendered HTML from your components and
           feed it into Speakable for screen reader simulation.
         </p>
@@ -162,6 +162,127 @@ describe('SubmitButton a11y', () => {
                 <span className="text-emerald-400">dist/my-app/browser/index.html</span>{' '}
                 <span className="text-orange-300">-f audit</span>
               </code>
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      {/* Svelte */}
+      <section className="mb-16">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-8 h-8 rounded bg-orange-100 flex items-center justify-center">
+            <span className="text-orange-600 font-bold text-sm">S</span>
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900">Svelte</h2>
+        </div>
+        <p className="text-slate-600 mb-6 leading-relaxed">
+          Use <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">@testing-library/svelte</code> to
+          render components, then pass the HTML to Speakable. For SvelteKit apps, analyze the
+          static adapter output directly.
+        </p>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Component test integration</h3>
+        <p className="text-slate-600 mb-4 text-sm">
+          Render your Svelte component in a test and extract the HTML for analysis:
+        </p>
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
+          <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">SubmitButton.a11y.test.ts</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`import { render } from '@testing-library/svelte';
+import { parseHTML, buildAccessibilityTree, renderNVDA, renderVoiceOver } from '@reticular/speakable';
+import SubmitButton from './SubmitButton.svelte';
+
+test('button announces correctly for NVDA', () => {
+  const { container } = render(SubmitButton, {
+    props: { label: 'Place Order' }
+  });
+  const html = container.innerHTML;
+
+  const doc = parseHTML(html);
+  const { model } = buildAccessibilityTree(doc.document.body);
+
+  expect(renderNVDA(model)).toContain('Place Order, button');
+});
+
+test('VoiceOver announces role first for landmarks', () => {
+  const { container } = render(NavBar, {
+    props: { label: 'Main' }
+  });
+  const doc = parseHTML(container.innerHTML);
+  const { model } = buildAccessibilityTree(doc.document.body);
+
+  // VoiceOver puts role before name for landmarks
+  expect(renderVoiceOver(model)).toContain('navigation, Main');
+});`}
+            </pre>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">SvelteKit static output</h3>
+        <p className="text-slate-600 mb-4 text-sm">
+          If you&apos;re using SvelteKit with the static adapter, analyze the build output directly:
+        </p>
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
+          <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Terminal</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed">
+              <code>
+                <span className="text-slate-500"># Build with static adapter</span>{'\n'}
+                <span className="text-blue-400">npm run build</span>{'\n\n'}
+                <span className="text-slate-500"># Analyze the generated pages</span>{'\n'}
+                <span className="text-blue-400">speakable</span>{' '}
+                <span className="text-emerald-400">build/index.html</span>{' '}
+                <span className="text-orange-300">-f audit -s all</span>{'\n\n'}
+                <span className="text-slate-500"># Analyze a specific route</span>{'\n'}
+                <span className="text-blue-400">speakable</span>{' '}
+                <span className="text-emerald-400">build/about/index.html</span>{' '}
+                <span className="text-orange-300">--selector &quot;main&quot; -f text</span>{'\n\n'}
+                <span className="text-slate-500"># Batch analyze all pages</span>{'\n'}
+                <span className="text-blue-400">speakable</span>{' '}
+                <span className="text-orange-300">--batch</span>{' '}
+                <span className="text-emerald-400">build/**/index.html</span>{' '}
+                <span className="text-orange-300">-f audit</span>
+              </code>
+            </pre>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Svelte 5 with runes</h3>
+        <p className="text-slate-600 mb-4 text-sm">
+          The same pattern works with Svelte 5 — the testing library renders the component
+          to DOM regardless of whether you use runes or legacy syntax:
+        </p>
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
+          <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Dialog.a11y.test.ts</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`import { render } from '@testing-library/svelte';
+import { parseHTML, buildAccessibilityTree, renderNVDA } from '@reticular/speakable';
+import Dialog from './Dialog.svelte';
+
+test('dialog announces with title and description', () => {
+  const { container } = render(Dialog, {
+    props: {
+      open: true,
+      title: 'Delete account?',
+      description: 'This cannot be undone.'
+    }
+  });
+
+  const doc = parseHTML(container.innerHTML);
+  const { model } = buildAccessibilityTree(doc.document.body);
+  const output = renderNVDA(model);
+
+  expect(output).toContain('Delete account?, dialog');
+  expect(output).toContain('This cannot be undone.');
+});`}
             </pre>
           </div>
         </div>
