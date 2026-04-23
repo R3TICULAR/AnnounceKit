@@ -36,8 +36,14 @@ function renderNodeVoiceOver(node: AccessibleNode, announcements: string[], c: C
     announcements.push(announcement);
   }
   
-  // Recursively render children
+  // Recursively render children, collapsing redundant same-name children
   for (const child of node.children) {
+    if (child.name && child.name === node.name && node.children.length === 1) {
+      for (const grandchild of child.children) {
+        renderNodeVoiceOver(grandchild, announcements, c);
+      }
+      continue;
+    }
     renderNodeVoiceOver(child, announcements, c);
   }
 }

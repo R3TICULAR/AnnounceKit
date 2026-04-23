@@ -36,8 +36,15 @@ function renderNodeNVDA(node: AccessibleNode, announcements: string[], c: ColorF
     announcements.push(announcement);
   }
   
-  // Recursively render children
+  // Recursively render children, collapsing redundant same-name children
   for (const child of node.children) {
+    if (child.name && child.name === node.name && node.children.length === 1) {
+      // Skip child that repeats parent name — recurse into grandchildren
+      for (const grandchild of child.children) {
+        renderNodeNVDA(grandchild, announcements, c);
+      }
+      continue;
+    }
     renderNodeNVDA(child, announcements, c);
   }
 }
