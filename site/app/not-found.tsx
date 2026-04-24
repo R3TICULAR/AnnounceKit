@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 export default function NotFound() {
   return (
+    <ScrollReveal>
     <div className="max-w-2xl mx-auto text-center py-32 px-6">
       <h1 className="text-6xl font-extrabold text-slate-900 tracking-tight mb-4">404</h1>
       <p className="text-xl text-slate-600 mb-8">
@@ -15,5 +17,6 @@ export default function NotFound() {
         Back to Home
       </Link>
     </div>
+    </ScrollReveal>
   );
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { PageFadeIn } from '../../components/ScrollReveal';
 
 export default function SignInPage() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -49,6 +50,7 @@ export default function SignInPage() {
   };
 
   return (
+    <PageFadeIn>
     <div className="flex-grow flex items-center justify-center px-4 py-12 md:py-24 bg-slate-50">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-8">
@@ -118,5 +120,6 @@ export default function SignInPage() {
         </p>
       </div>
     </div>
+    </PageFadeIn>
   );
 }

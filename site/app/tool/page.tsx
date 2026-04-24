@@ -11,6 +11,7 @@ import { ParsingError } from '@core/../web/src/browser-parser';
 import { SelectorError } from '@core/extractor/tree-builder';
 import { describeChange } from '@core/diff/diff-algorithm';
 import { SIZE_LIMIT_BYTES } from '@core/../web/src/constants';
+import { PageFadeIn } from '../../components/ScrollReveal';
 
 type TabId = 'announcements' | 'audit' | 'json' | 'diff';
 
@@ -77,6 +78,7 @@ export default function AnalyzerPage() {
   const panelContent = getPanelContent(activeTab, result, screenReader);
 
   return (
+    <PageFadeIn>
     <div className="pb-12 px-6">
       <div className="max-w-7xl mx-auto">
       <header className="mb-10 pt-12">
@@ -258,6 +260,7 @@ export default function AnalyzerPage() {
       </div>
       </div>
     </div>
+    </PageFadeIn>
   );
 }
 

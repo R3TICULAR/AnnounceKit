@@ -340,6 +340,7 @@ export default function LandingPage() {
       </ScrollReveal>
 
       {/* Why It Matters Section */}
+      <ScrollReveal>
       <section className="py-24 px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">
           <div className="relative overflow-hidden bg-teal-50/50 border border-teal-200/30 rounded-3xl p-8 md:p-16 text-center shadow-sm">
@@ -390,8 +391,10 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* Final CTA Section */}
+      <ScrollReveal>
       <section className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">
@@ -417,6 +420,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
     </>
   );
 }

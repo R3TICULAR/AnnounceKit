@@ -3,6 +3,7 @@
 import { useUser, useClerk } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { PageFadeIn } from '../../components/ScrollReveal';
 
 export default function SettingsPage() {
   const { user, isLoaded } = useUser();
@@ -41,6 +42,7 @@ export default function SettingsPage() {
   };
 
   return (
+    <PageFadeIn>
     <div className="max-w-3xl mx-auto pt-12 pb-12 px-6">
       <div className="mb-10">
         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Settings</h1>
@@ -143,5 +145,6 @@ export default function SettingsPage() {
         </div>
       </div>
     </div>
+    </PageFadeIn>
   );
 }
