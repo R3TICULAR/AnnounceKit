@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speakable</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="28" height="20" rx="4" fill="#0D9488"/>
+          <polygon points="8,24 14,24 10,30" fill="#0D9488"/>
+          <path d="M12 11 L12 17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 9 L16 19" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M20 11 L20 17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">Speakable</span>
+      </div>
+      <a href="https://getspeakable.dev/tool" target="_blank" class="web-link">Web Tool ↗</a>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="control-row">
+        <label for="reader-select">Screen Reader</label>
+        <select id="reader-select">
+          <option value="nvda" selected>NVDA</option>
+          <option value="jaws">JAWS</option>
+          <option value="voiceover">VoiceOver</option>
+          <option value="all">All</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="format-select">Format</label>
+        <select id="format-select">
+          <option value="text" selected>Text</option>
+          <option value="audit">Audit Report</option>
+          <option value="json">JSON</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label for="selector-input">CSS Selector</label>
+        <input id="selector-input" type="text" placeholder="e.g. main, button, .hero" />
+      </div>
+    </div>
+
+    <button id="analyze-btn" class="analyze-btn">
+      <span class="btn-icon">▶</span>
+      Analyze This Page
+    </button>
+
+    <!-- Status -->
+    <div id="status" class="status hidden"></div>
+
+    <!-- Results -->
+    <div id="results" class="results hidden">
+      <div class="results-header">
+        <span id="results-title" class="results-title">Results</span>
+        <button id="copy-btn" class="icon-btn" title="Copy to clipboard">📋</button>
+      </div>
+      <pre id="output" class="output"></pre>
+    </div>
+
+    <!-- Page info -->
+    <div id="page-info" class="page-info hidden">
+      <span id="page-title"></span>
+      <span id="page-url"></span>
+    </div>
+  </div>
+
+  <script src="analyzer-bridge.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

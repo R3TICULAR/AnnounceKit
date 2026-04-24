@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { ScrollReveal } from '../../components/ScrollReveal';
 
 export default function SecurityPage() {
   return (
+    <ScrollReveal>
     <div className="max-w-3xl mx-auto pt-12 pb-24 px-6">
       <header className="mb-12">
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Security</h1>
@@ -110,5 +112,6 @@ export default function SecurityPage() {
         </Link>
       </div>
     </div>
+    </ScrollReveal>
   );
 }

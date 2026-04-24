@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { PageFadeIn } from '../../components/ScrollReveal';
 
 type FormStep = 'form' | 'verification';
 
@@ -91,6 +92,7 @@ export default function SignUpPage() {
   };
 
   return (
+    <PageFadeIn>
     <div className="flex-grow flex items-center justify-center py-16 px-6 bg-slate-50">
       <div className="w-full max-w-md bg-white rounded-xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100">
         {/* Brand */}
@@ -240,5 +242,6 @@ export default function SignUpPage() {
         )}
       </div>
     </div>
+    </PageFadeIn>
   );
 }
