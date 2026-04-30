@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import {
   runAnalysis,
   runDiffAnalysis,
@@ -12,6 +12,8 @@ import { SelectorError } from '@core/extractor/tree-builder';
 import { describeChange } from '@core/diff/diff-algorithm';
 import { SIZE_LIMIT_BYTES } from '@core/../web/src/constants';
 import { PageFadeIn } from '../../components/ScrollReveal';
+import { useAuth, useUser } from '@clerk/nextjs';
+import Link from 'next/link';
 
 type TabId = 'announcements' | 'audit' | 'json' | 'diff';
 
@@ -33,6 +35,23 @@ export default function AnalyzerPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { isSignedIn } = useAuth();
+  const { user } = useUser();
+  const [showProModal, setShowProModal] = useState(false);
+
+  const metadata = (user?.publicMetadata || {}) as Record<string, unknown>;
+  const isPro = metadata.subscriptionStatus === 'active' && metadata.subscriptionTier === 'pro';
+
+  // Show Pro welcome modal once after upgrade (stored in sessionStorage)
+  useEffect(() => {
+    if (isPro && typeof window !== 'undefined') {
+      const shown = sessionStorage.getItem('speakable-pro-welcome-shown');
+      if (!shown) {
+        setShowProModal(true);
+        sessionStorage.setItem('speakable-pro-welcome-shown', '1');
+      }
+    }
+  }, [isPro]);
 
   const handleAnalyze = useCallback(() => {
     setError(null);
@@ -79,12 +98,108 @@ export default function AnalyzerPage() {
 
   return (
     <PageFadeIn>
+    {/* Pro Welcome Modal */}
+    {showProModal && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="pro-modal-title">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-8 animate-[slideDown_300ms_ease-out]">
+          <div className="text-center mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center mx-auto mb-4">
+              <span className="material-symbols-outlined text-4xl" aria-hidden="true" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+            </div>
+            <h2 id="pro-modal-title" className="text-2xl font-extrabold text-slate-900 mb-2">Welcome to Pro</h2>
+            <p className="text-slate-600">
+              Thanks for subscribing. You now have access to the full Speakable toolkit.
+            </p>
+          </div>
+          <div className="space-y-3 mb-8">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+              <span className="material-symbols-outlined text-teal-600" aria-hidden="true">stacks</span>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Batch Processing</p>
+                <p className="text-xs text-slate-500">Analyze multiple files in a single CLI run</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+              <span className="material-symbols-outlined text-teal-600" aria-hidden="true">compare_arrows</span>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Semantic Diff</p>
+                <p className="text-xs text-slate-500">Detect accessibility regressions between versions</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
+              <span className="material-symbols-outlined text-teal-600" aria-hidden="true">deployed_code</span>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">CI/CD Integration</p>
+                <p className="text-xs text-slate-500">Automate checks in GitHub Actions, GitLab CI, and more</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/docs/cicd-integration"
+              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-center transition-colors"
+            >
+              Set Up CI/CD Integration
+            </Link>
+            <Link
+              href="/docs/usage-guide"
+              className="w-full py-3 bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold rounded-lg text-center transition-colors"
+            >
+              View Pro Usage Guide
+            </Link>
+            <button
+              onClick={() => setShowProModal(false)}
+              className="w-full py-2 text-slate-500 hover:text-slate-700 text-sm font-medium transition-colors"
+            >
+              Continue to Analyzer
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+
     <div className="pb-12 px-6">
       <div className="max-w-7xl mx-auto">
       <header className="mb-10 pt-12">
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">Accessibility Analyzer</h1>
         <p className="text-lg text-gray-600">Paste or upload HTML to see how screen readers will announce it.</p>
       </header>
+
+      {/* Pro features banner */}
+      {isPro && (
+        <div className="mb-8 p-4 rounded-xl bg-teal-50 border border-teal-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-teal-600" aria-hidden="true" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+            <div>
+              <p className="text-sm font-semibold text-teal-900">Pro Plan Active</p>
+              <p className="text-xs text-teal-700">Batch processing, semantic diff, and CI/CD integration are available via the CLI.</p>
+            </div>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            <Link href="/docs/cicd-integration" className="text-xs font-semibold text-teal-700 bg-white px-3 py-1.5 rounded-lg border border-teal-200 hover:bg-teal-50 transition-colors">
+              CI/CD Setup
+            </Link>
+            <Link href="/docs/usage-guide" className="text-xs font-semibold text-teal-700 bg-white px-3 py-1.5 rounded-lg border border-teal-200 hover:bg-teal-50 transition-colors">
+              Usage Guide
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Free tier upgrade nudge */}
+      {isSignedIn && !isPro && (
+        <div className="mb-8 p-4 rounded-xl bg-blue-50 border border-blue-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-blue-600" aria-hidden="true">upgrade</span>
+            <p className="text-sm text-blue-800">
+              Upgrade to Pro for batch processing, semantic diff, and CI/CD integration.
+            </p>
+          </div>
+          <Link href="/pricing" className="text-xs font-semibold text-blue-700 bg-white px-3 py-1.5 rounded-lg border border-blue-200 hover:bg-blue-50 transition-colors shrink-0">
+            See Plans
+          </Link>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Input Section */}
