@@ -36,8 +36,14 @@ function renderNodeJAWS(node: AccessibleNode, announcements: string[], c: ColorF
     announcements.push(announcement);
   }
   
-  // Recursively render children
+  // Recursively render children, collapsing redundant same-name children
   for (const child of node.children) {
+    if (child.name && child.name === node.name && node.children.length === 1) {
+      for (const grandchild of child.children) {
+        renderNodeJAWS(grandchild, announcements, c);
+      }
+      continue;
+    }
     renderNodeJAWS(child, announcements, c);
   }
 }

@@ -104,7 +104,7 @@ export function Navigation() {
               <span className="text-sm text-slate-600">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
               <button
                 onClick={() => signOut({ redirectUrl: '/' })}
-                className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded transition-colors"
               >
                 Sign Out
               </button>
@@ -181,7 +181,7 @@ export function Navigation() {
               <span className="text-sm text-slate-600 px-2">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
               <button
                 onClick={() => signOut({ redirectUrl: '/' })}
-                className="block w-full text-left rounded px-2 py-2 text-sm font-medium text-slate-600 hover:text-blue-600"
+                className="block w-full text-left rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
               >
                 Sign Out
               </button>

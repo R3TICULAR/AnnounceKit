@@ -11,6 +11,7 @@ const DOCS_SECTIONS = [
   { label: 'Common Mistakes', href: '/docs/common-mistakes' },
   { label: 'Framework Guides', href: '/docs/frameworks' },
   { label: 'Spec Integration', href: '/docs/spec-integration' },
+  { label: 'Testing Ecosystem', href: '/docs/testing-ecosystem' },
   { label: 'CI/CD Integration', href: '/docs/cicd-integration' },
 ];
 

@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { ScrollReveal } from '../../components/ScrollReveal';
 
 export default function ContactPage() {
   return (
+    <ScrollReveal>
     <div className="max-w-3xl mx-auto pt-12 pb-24 px-6">
       <header className="mb-12 text-center">
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Contact Us</h1>
@@ -83,5 +85,6 @@ export default function ContactPage() {
         </Link>
       </div>
     </div>
+    </ScrollReveal>
   );
 }
