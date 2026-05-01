@@ -390,7 +390,9 @@ interface AccessibleNode {
           </p>
         </div>
         <Link
-          href="#"
+          href="https://discord.gg/uSKJUEgdR"
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-white text-teal-700 px-6 py-2 rounded-lg font-bold hover:bg-teal-50 transition-colors whitespace-nowrap"
         >
           Join Discord

@@ -15,7 +15,7 @@ export default function LandingPage() {
               Version 1.0 Now Available
             </span>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
-              Preview what screen readers will say — before your users hear it
+              Preview what screen readers will say before your users hear it
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
               Speakable simulates how NVDA, JAWS, and VoiceOver interpret
