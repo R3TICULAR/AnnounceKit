@@ -1,0 +1,2 @@
+sku_id,title,description,price,currency,availability,url
+speakable-pro,"Speakable Pro — Monthly","Screen reader simulation tool for developers. Predict how NVDA, JAWS, and VoiceOver interpret your HTML. Pro includes batch processing, semantic diff for regression detection, and CI/CD integration. Free tier available at getspeakable.dev. Upgrade to Pro at getspeakable.dev/pricing.",1900,usd,in_stock,https://getspeakable.dev

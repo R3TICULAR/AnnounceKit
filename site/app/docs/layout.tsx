@@ -12,6 +12,7 @@ const DOCS_SECTIONS = [
   { label: 'Framework Guides', href: '/docs/frameworks' },
   { label: 'Spec Integration', href: '/docs/spec-integration' },
   { label: 'Testing Ecosystem', href: '/docs/testing-ecosystem' },
+  { label: 'Agentic Commerce', href: '/docs/agentic-commerce' },
   { label: 'CI/CD Integration', href: '/docs/cicd-integration' },
 ];
 
